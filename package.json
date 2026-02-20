@@ -1,4 +1,4 @@
-echo '{
+{
   "name": "omniutil-web",
   "version": "0.1.0",
   "private": true,
@@ -12,8 +12,6 @@ echo '{
     "react": "latest",
     "react-dom": "latest",
     "framer-motion": "latest",
-    "lucide-react": "latest",
-    "clsx": "latest",
-    "tailwind-merge": "latest"
+    "lucide-react": "latest"
   }
-}' > package.json
+}
