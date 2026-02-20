@@ -1,68 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Activity, Globe, Cpu } from 'lucide-react';
 
-const OmniDashboard = () => {
-  const [data, setData] = useState({ supply: 'Chargement...', status: 'Syncing' });
-
-  // Connexion temps réel à ton API Vercel
-  useEffect(() => {
-    fetch('https://omniutil-infra.vercel.app')
-      .then(res => res.json())
-      .then(json => setData({ supply: json.circulating_supply, status: 'Operational' }))
-      .catch(() => setData({ supply: 'Error', status: 'Offline' }));
-  }, []);
-
+export default function OmniGenesis() {
   return (
-    <div className="min-h-screen bg-black text-cyan-400 p-8 font-mono overflow-hidden relative">
-      {/* Effet 4D : Background animé Nebula */}
-      <div className="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900 via-transparent to-black" />
+    <div className="min-h-screen bg-black text-cyan-400 font-mono p-10 selection:bg-cyan-500 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com')] opacity-10"></div>
       
-      <header className="relative z-10 flex justify-between items-center mb-12 border-b border-cyan-900 pb-4">
-        <h1 className="text-3xl font-bold tracking-tighter uppercase italic">OMNIUTIL // SUPREME_INFRA</h1>
-        <div className="flex items-center gap-4">
-          <span className={`h-3 w-3 rounded-full animate-pulse ${data.status === 'Operational' ? 'bg-green-500' : 'bg-red-500'}`} />
-          <p className="text-xs tracking-widest">{data.status} SYSTEM</p>
-        </div>
-      </header>
+      <motion.div initial={{y:-50, opacity:0}} animate={{y:0, opacity:1}} className="text-center mb-16 relative z-10">
+        <h1 className="text-5xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-cyan-700">OMNIUTIL INFRASTRUCTURE</h1>
+        <p className="mt-2 text-xs tracking-[0.5em] uppercase opacity-60">Protocole No.1 Mondial de Récompenses Réelles</p>
+      </motion.div>
 
-      <main className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Module 1: Supply Dynamique */}
-        <motion.div whileHover={{ scale: 1.02 }} className="bg-gray-900/50 border border-cyan-500/30 p-6 rounded-xl backdrop-blur-md shadow-[0_0_20px_rgba(0,255,255,0.1)]">
-          <Activity className="mb-4 text-cyan-300" />
-          <h2 className="text-xs text-cyan-500 uppercase mb-2">Circulating Supply</h2>
-          <p className="text-4xl font-black text-white leading-none">{data.supply}</p>
-        </motion.div>
-
-        {/* Module 2: AI Fraud Engine Status */}
-        <motion.div whileHover={{ scale: 1.02 }} className="bg-gray-900/50 border border-purple-500/30 p-6 rounded-xl backdrop-blur-md">
-          <ShieldCheck className="mb-4 text-purple-400" />
-          <h2 className="text-xs text-purple-500 uppercase mb-2">AI Fraud Validation</h2>
-          <p className="text-2xl font-bold text-white leading-tight italic">ACTIVE & SCANNING</p>
-        </motion.div>
-
-        {/* Module 3: BSC Connection */}
-        <motion.div whileHover={{ scale: 1.02 }} className="bg-gray-900/50 border border-yellow-500/30 p-6 rounded-xl backdrop-blur-md">
-          <Globe className="mb-4 text-yellow-400" />
-          <h2 className="text-xs text-yellow-500 uppercase mb-2">Mainnet Oracle</h2>
-          <p className="text-lg text-white font-semibold tracking-tighter italic">CONNECTED_VIA_RPC</p>
-        </motion.div>
-
-        {/* Module 4: Processor Load */}
-        <motion.div whileHover={{ scale: 1.02 }} className="bg-gray-900/50 border border-red-500/30 p-6 rounded-xl backdrop-blur-md">
-          <Cpu className="mb-4 text-red-400" />
-          <h2 className="text-xs text-red-500 uppercase mb-2">Orchestrator Load</h2>
-          <div className="w-full bg-red-950 h-2 rounded-full mt-4">
-            <motion.div animate={{ width: "12%" }} className="bg-red-500 h-full rounded-full" />
+      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+        <div className="border-l-2 border-cyan-500 pl-6 space-y-4 bg-cyan-900/10 p-6 rounded-r-xl backdrop-blur-sm">
+          <h2 className="text-xl font-bold italic">GATEWAY PARTENAIRE</h2>
+          <p className="text-sm text-gray-400">Scannez pour déclencher l'évaluation IA du coordinateur.</p>
+          <div className="w-48 h-48 bg-white mx-auto mt-4 rounded-lg flex items-center justify-center border-4 border-cyan-500 shadow-[0_0_30px_rgba(0,255,255,0.3)]">
+            <p className="text-black text-[10px] font-bold">QR_OMNI_GATEWAY</p>
           </div>
-        </motion.div>
-      </main>
+        </div>
 
-      <footer className="fixed bottom-4 left-8 text-[10px] opacity-40 uppercase tracking-widest">
-        © 2026 OMNIUTIL INFRASTRUCTURE // INVINCIBILITY_MODE_ENABLED
+        <div className="border-r-2 border-purple-500 pr-6 text-right space-y-4 bg-purple-900/10 p-6 rounded-l-xl backdrop-blur-sm">
+          <h2 className="text-xl font-bold italic">STATUS RÉSEAU</h2>
+          <div className="text-xs space-y-2">
+            <p>AIRTEL-RDC : <span className="text-green-400">SYNC_PENDING</span></p>
+            <p>CANAL+ : <span className="text-green-400">CONNECTED</span></p>
+            <p>AMAZON_GATE : <span className="text-yellow-400">SCANNING...</span></p>
+          </div>
+        </div>
+      </div>
+
+      <footer className="fixed bottom-4 w-full text-center text-[10px] tracking-widest opacity-30">
+        OMNIUTIL INFRASTRUCTURE - INVINCIBLE - 24/7/365 - COMPLIANT WITH ABI_SUPREME
       </footer>
     </div>
   );
-};
-
-export default OmniDashboard;
+}
