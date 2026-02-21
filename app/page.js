@@ -1,38 +1,47 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-export default function OmniGenesis() {
+export default function OmniSupreme() {
   return (
-    <div className="min-h-screen bg-black text-cyan-400 font-mono p-10 selection:bg-cyan-500 overflow-hidden">
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900 via-transparent to-black" />
-
-      <motion.div initial={{y:-50, opacity:0}} animate={{y:0, opacity:1}} className="text-center mb-16 relative z-10">
-        <h1 className="text-5xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-cyan-700">OMNIUTIL INFRASTRUCTURE</h1>
-        <p className="mt-2 text-xs tracking-[0.5em] uppercase opacity-60">Protocole No.1 Mondial de Récompenses Réelles</p>
-      </motion.div>
-
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
-        <div className="border-l-2 border-cyan-500 pl-6 space-y-4 bg-cyan-900/10 p-6 rounded-r-xl backdrop-blur-sm">
-          <h2 className="text-xl font-bold italic text-white uppercase">Gateway Partenaire</h2>
-          <p className="text-sm text-gray-400">Scannez pour déclencher l'évaluation IA du coordinateur.</p>
-          <div className="w-48 h-48 bg-white mx-auto mt-4 rounded-lg flex items-center justify-center border-4 border-cyan-500 shadow-[0_0_30px_rgba(0,255,255,0.3)]">
-             <img src="https://omniutil-infra.vercel.app" alt="QR Gateway" className="w-full h-full" />
-          </div>
+    <div className="min-h-screen bg-[#020617] text-white selection:bg-cyan-500 overflow-x-hidden">
+      {/* Background Cyber-Espace */}
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-black to-black z-0"></div>
+      
+      <nav className="relative z-50 flex justify-between p-6 border-b border-white/5 backdrop-blur-xl">
+        <div className="text-2xl font-black tracking-tighter text-cyan-400 italic">OMNIUTIL.IO</div>
+        <div className="flex gap-8 text-[10px] tracking-widest uppercase opacity-60">
+          <span>Infra: Online</span>
+          <span className="text-green-400">Node: Washington iad1</span>
         </div>
+      </nav>
 
-        <div className="border-r-2 border-purple-500 pr-6 text-right space-y-4 bg-purple-900/10 p-6 rounded-l-xl backdrop-blur-sm">
-          <h2 className="text-xl font-bold italic text-white uppercase">Status Réseau</h2>
-          <div className="text-xs space-y-2">
-            <p>AIRTEL-RDC : <span className="text-green-400 animate-pulse font-bold text-sm">SYNC_PENDING</span></p>
-            <p>CANAL+ : <span className="text-green-400 font-bold text-sm">CONNECTED</span></p>
-            <p>AMAZON_GATE : <span className="text-yellow-400 font-bold text-sm">SCANNING...</span></p>
+      <main className="relative z-10 pt-20 px-10">
+        <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} className="max-w-6xl mx-auto">
+          <h1 className="text-8xl font-black leading-none tracking-tighter mb-4 italic uppercase">
+            The World's <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">No.1 Reward</span> Protocol.
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl mb-12">L'infrastructure OMNIUTIL transforme la consommation réelle (Airtel, Canal+, Amazon) en actifs financiers liquides 24h/7j.</p>
+          
+          <div className="grid grid-cols-3 gap-1 mb-20 border border-white/10 rounded-3xl overflow-hidden bg-white/5 backdrop-blur-3xl">
+            <div className="p-10 border-r border-white/10">
+              <p className="text-xs uppercase opacity-40 mb-2">Statut IA Coordinateur</p>
+              <p className="text-3xl font-bold text-green-400">OPERATIONAL</p>
+            </div>
+            <div className="p-10 border-r border-white/10">
+              <p className="text-xs uppercase opacity-40 mb-2">Flux Partenaires Scannés</p>
+              <p className="text-3xl font-bold">5,204,812 +</p>
+            </div>
+            <div className="p-10">
+              <p className="text-xs uppercase opacity-40 mb-2">Index UTIL/USDT</p>
+              <p className="text-3xl font-bold tracking-tighter">$ 1.0024</p>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <footer className="fixed bottom-4 w-full text-center text-[10px] tracking-widest opacity-30 uppercase">
-        OMNIUTIL INFRASTRUCTURE - INVINCIBLE - 24/7/365 - COMPLIANT WITH ABI_SUPREME
+        </motion.div>
+      </main>
+      
+      <footer className="fixed bottom-6 w-full text-center text-[8px] opacity-20 uppercase tracking-[1em]">
+        Omniprésence - Invincibilité - OMNIUTIL Supreme 2026
       </footer>
     </div>
   );
