@@ -12,6 +12,7 @@
     "react": "latest",
     "react-dom": "latest",
     "framer-motion": "latest",
+    "motion-dom": "latest",
     "lucide-react": "latest",
     "three": "latest",
     "@react-three/fiber": "latest",
