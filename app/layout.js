@@ -1,9 +1,6 @@
 export const metadata = {
   title: 'OMNIUTIL | World No.1 Real Consumption Reward Protocol',
-  description: 'Infrastructure blockchain 4D transformant la consommation réelle (Airtel, Canal+, Amazon) en actifs liquides 24h/7j.',
-  verification: {
-    google: 'Vq5ovW9mmtHkLtoC8X_ftukeiKRSn8aeDRtYhobzmpE',
-  },
+  description: 'Infrastructure blockchain 4D transformant la consommation réelle en actifs liquides 24h/7j.',
 }
 
 export default function RootLayout({ children }) {
