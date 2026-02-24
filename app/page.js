@@ -1,3 +1,4 @@
+import Logo from '../components/Logo';
 import RewardSimulator from '../components/RewardSimulator';
 "use client";
 import React, { useState, useEffect } from 'react';
@@ -16,7 +17,7 @@ export default function OmniConsole() {
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black z-0" />
       
       <nav className="relative z-10 flex justify-between items-center mb-12 border-b border-cyan-500/20 pb-6 backdrop-blur-md">
-        <div className="text-3xl font-black italic tracking-tighter text-white">OMNIUTIL<span className="text-cyan-500">.IO</span></div>
+        <div className="text-3xl font-black italic tracking-tighter text-white"> <Logo size={32} /> OMNIUTIL<span className="text-cyan-500">.IO</span></div>
         <div className="flex items-center gap-6 text-[10px] uppercase tracking-[0.3em]">
           <span className="flex items-center gap-2"><div className="h-2 w-2 bg-green-500 rounded-full animate-pulse"/> Infra: Ready</span>
           <span className="opacity-50">Creator: Johny-1992</span>
@@ -79,7 +80,7 @@ export default function OmniConsole() {
       </main>
 
       <footer className="fixed bottom-6 w-full text-center text-[8px] opacity-20 uppercase tracking-[1.5em] z-50">
-        OMNIUTIL SUPREME - NO.1 WORLDWIDE PROTOCOL - 2026
+         <Logo size={32} /> OMNIUTIL SUPREME - NO.1 WORLDWIDE PROTOCOL - 2026
       </footer>
     </div>
   );
