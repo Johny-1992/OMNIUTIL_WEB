@@ -1,39 +1,56 @@
 "use client";
-import React from 'react';
-import { Gift, ShieldCheck, Zap } from 'lucide-react';
+import React, { useState } from 'react';
+import { Gift, ShieldCheck, Zap, Loader2 } from 'lucide-react';
 
 export default function AirdropBanner() {
-  // PRIX FIXE INDEXÉ SUR L'INFRASTRUCTURE (DÉFINI DANS LA LOGIQUE MÈRE)
-  const UTIL_PRICE = "1.25";
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("READY");
+
+  const connectAndClaim = async () => {
+    if (!window.ethereum) {
+      window.alert("ERREUR : MetaMask non détecté.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // Utilisation du RPC natif de MetaMask (Pas besoin de ethers.js)
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const userAddress = accounts[0];
+
+      // Appel à ton API Souveraine sur Vercel
+      const response = await fetch('/api/claim', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ wallet: userAddress })
+      });
+
+      if (response.ok) {
+        setStatus("SUCCESS");
+        window.alert(`SCELLÉ : 1 UTIL attribué à ${userAddress.slice(0,6)}...`);
+      }
+    } catch (err) {
+      setStatus("ERROR");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="bg-[#00ff88] p-2 text-center relative z-50 border-b border-black/10 shadow-[0_0_15px_rgba(0,255,136,0.3)]">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 text-black text-[10px] md:text-[11px] font-black uppercase tracking-widest">
-        
-        {/* SECTION PRIX FIXE - VISIBILITÉ N°1 MONDIAL */}
-        <div className="flex items-center gap-2 bg-black text-[#00ff88] px-3 py-1 rounded-sm">
-          <Zap size={14} fill="#00ff88" />
-          <span>UTIL PRICE: ${UTIL_PRICE} USDT</span>
-        </div>
-
-        {/* MESSAGE AIRDROP */}
-        <div className="flex items-center gap-2">
-          <Gift size={16} className="animate-bounce" />
-          <span className="hidden sm:inline">AIRDROP LIVE : 1 UTIL SCELLÉ POUR LES 10 000 PREMIERS CONQUÉRANTS</span>
-          <span className="sm:hidden">1 UTIL SCELLÉ OFFERT</span>
-        </div>
-
-        {/* BOUTON D'ACTION EXPLOITABLE */}
+    <div className={`p-2 text-center z-50 border-b ${status === 'SUCCESS' ? 'bg-blue-600' : 'bg-[#00ff88]'}`}>
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-black text-[10px] font-black uppercase tracking-widest">
+        <div className="bg-black text-[#00ff88] px-2 py-1 rounded">PRIX UTIL: $1.25</div>
         <button 
-          onClick={() => window.alert('Initialisation du Logic-Seal... Connectez votre Wallet OMNIUTIL pour réclamer.')} 
-          className="bg-black text-[#00ff88] border border-[#00ff88] px-5 py-1 rounded-full text-[9px] hover:bg-white hover:text-black hover:border-black transition-all shadow-xl font-bold"
+          onClick={connectAndClaim}
+          disabled={loading || status === "SUCCESS"}
+          className="bg-black text-[#00ff88] px-4 py-1 rounded-full flex items-center gap-2"
         >
-          RÉCLAMER MAINTENANT
+          {loading ? <Loader2 size={12} className="animate-spin" /> : <Gift size={14} />}
+          {status === "SUCCESS" ? "RÉCLAMÉ" : "CONNECTER & RÉCLAMER"}
         </button>
-
-        <div className="hidden lg:flex items-center gap-1 opacity-60">
+        <div className="opacity-60 flex items-center gap-1">
           <ShieldCheck size={14} />
-          <span>GOD_MODE_SECURED</span>
+          <span>NEMESIS_RECOVERY ACTIVE</span>
         </div>
       </div>
     </div>
