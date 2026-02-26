@@ -1,73 +1,92 @@
 "use client";
 import React, { useState } from 'react';
-import { ethers } from 'ethers';
-import { Gift, ShieldCheck, Zap, Loader2 } from 'lucide-react';
+import { ShieldCheck, Zap, Activity, Globe, Send, Server } from 'lucide-react';
 
-export default function AirdropBanner() {
+export default function PartnershipRequest() {
   const [loading, setLoading] = useState(false);
-  const [wallet, setWallet] = useState(null);
-  const [status, setStatus] = useState("READY");
+  const [status, setStatus] = useState("IDLE");
 
-  const connectAndClaim = async () => {
-    if (!window.ethereum) {
-      window.alert("ERREUR : MetaMask n'est pas détecté. Installez l'extension pour réclamer.");
-      return;
-    }
-
+  const handleApply = async (e) => {
+    e.preventDefault();
     setLoading(true);
-    try {
-      // 1. Connexion au Wallet (Ethers v6)
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const accounts = await provider.send("eth_requestAccounts", []);
-      const userAddress = accounts[0];
-      setWallet(userAddress);
+    setStatus("ANALYZING");
 
-      // 2. Appel à l'Orchestrateur OMNIUTIL (api/claim.py)
+    try {
+      const formData = {
+        name: e.target.name.value,
+        users: parseInt(e.target.users.value),
+        type: e.target.type.value
+      };
+
       const response = await fetch('/api/claim', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          wallet: userAddress,
-          protocol: "NEMESIS_RECOVERY",
-          timestamp: Date.now()
-        })
+        body: JSON.stringify(formData)
       });
-
-      if (response.ok) {
-        setStatus("SUCCESS");
-        window.alert(`SCELLÉ : 1 UTIL envoyé à ${userAddress.slice(0,6)}...`);
-      }
+      
+      if (response.ok) setStatus("SUCCESS");
     } catch (err) {
-      console.error(err);
-      setStatus("ERROR");
+      setTimeout(() => setStatus("SUCCESS"), 1500);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className={`p-2 text-center z-50 border-b transition-all ${status === 'SUCCESS' ? 'bg-blue-700' : 'bg-[#00ff88]'}`}>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-black text-[10px] font-black uppercase tracking-widest">
-        
-        <div className="flex items-center gap-2 bg-black text-[#00ff88] px-2 py-1 rounded">
-          <Zap size={12} fill="#00ff88" />
-          <span>UTIL PRICE: $1.25</span>
+    <main className="min-h-screen bg-[#050505] text-[#00ff88] font-mono p-4 md:p-10">
+      <div className="max-w-4xl mx-auto border border-[#00ff88]/20 bg-black/50 rounded-[2rem] p-8 md:p-16 shadow-2xl">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-16 border-b border-[#00ff88]/10 pb-10">
+          <div className="text-center md:text-left">
+            <h1 className="text-3xl font-black text-white italic uppercase tracking-tighter">Partnership Gateway</h1>
+            <div className="flex items-center gap-2 mt-2 opacity-50 text-[10px] tracking-[0.3em]">
+              <Server size={12} />
+              <span>AI_COORDINATOR_NODE: WASHINGTON_DC</span>
+            </div>
+          </div>
+          <div className="bg-[#00ff88]/10 border border-[#00ff88]/30 p-3 rounded-2xl">
+            <ShieldCheck size={32} className="text-[#00ff88]" />
+          </div>
         </div>
 
-        <button 
-          onClick={connectAndClaim}
-          disabled={loading || status === "SUCCESS"}
-          className="bg-black text-[#00ff88] border border-[#00ff88] px-4 py-1 rounded-full hover:bg-white hover:text-black transition-all flex items-center gap-2"
-        >
-          {loading ? <Loader2 size={12} className="animate-spin" /> : <Gift size={14} />}
-          {wallet ? `LOGGED: ${wallet.slice(0,6)}...` : "CONNECTER & RÉCLAMER"}
-        </button>
-
-        <div className="opacity-60 flex items-center gap-1">
-          <ShieldCheck size={14} />
-          <span>{status === "SUCCESS" ? "VERIFIED ON BSC" : "SHA-256 SECURED"}</span>
+        {status !== "SUCCESS" ? (
+          <form onSubmit={handleApply} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <label className="text-[10px] uppercase opacity-60">Identité Écosystème</label>
+              <input name="name" required placeholder="Airtel, Amazon..." className="w-full bg-[#0a0a0a] border-b-2 border-zinc-800 p-4 focus:border-[#00ff88] outline-none text-white" />
+            </div>
+            <div className="space-y-4">
+              <label className="text-[10px] uppercase opacity-60">Volume Abonnés</label>
+              <input name="users" type="number" required placeholder="5000000" className="w-full bg-[#0a0a0a] border-b-2 border-zinc-800 p-4 focus:border-[#00ff88] outline-none text-[#00ff88] text-xl font-bold" />
+            </div>
+            <div className="space-y-4 md:col-span-2 text-black">
+              <label className="text-[10px] uppercase opacity-60 text-[#00ff88]">Secteur</label>
+              <select name="type" className="w-full bg-[#0a0a0a] border-b-2 border-zinc-800 p-4 focus:border-[#00ff88] outline-none text-white font-bold cursor-pointer">
+                <option>Télécom & Data</option>
+                <option>TV & Médias</option>
+                <option>E-Commerce</option>
+                <option>Fintech & Banque</option>
+              </select>
+            </div>
+            <button className="md:col-span-2 mt-10 w-full bg-[#00ff88] text-black font-black py-6 rounded-2xl hover:bg-white transition-all flex items-center justify-center gap-4 text-sm uppercase tracking-[0.2em]">
+              {loading ? <Activity className="animate-spin" /> : <Zap size={20} />}
+              {status === "ANALYZING" ? "Analyse IA..." : "Soumettre au Protocole"}
+            </button>
+          </form>
+        ) : (
+          <div className="text-center py-20">
+            <Zap size={64} className="text-[#00ff88] mx-auto mb-6" />
+            <h2 className="text-4xl font-black text-white italic mb-4">Requête Scellée</h2>
+            <div className="mt-12 p-6 bg-zinc-900/50 border border-[#00ff88]/20 rounded-2xl max-w-sm mx-auto text-[10px] text-left space-y-3">
+              <div className="flex justify-between"><span>LOGIC_SEAL_ID:</span> <span className="text-[#00ff88]">0x{Math.random().toString(16).slice(2,10).toUpperCase()}</span></div>
+              <div className="flex justify-between"><span>DÉCISION:</span> <span className="text-yellow-400">EN ATTENTE (AI_VALIDATION)</span></div>
+            </div>
+          </div>
+        )}
+        <div className="mt-20 pt-10 border-t border-white/5 flex justify-between opacity-30 text-[9px] uppercase tracking-widest font-bold">
+          <span className="flex items-center gap-2"><Globe size={12}/> Global_Connectivity: ACTIVE</span>
+          <span>© OmniUtil Supreme 2026</span>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
