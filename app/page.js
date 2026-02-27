@@ -5,16 +5,14 @@ import { Shield, Globe, Cpu, Zap, Activity, Share2 } from 'lucide-react';
 import Logo from '../components/Logo';
 import RewardSimulator from '../components/RewardSimulator';
 import FortuneCounter from '../components/FortuneCounter';
-import OmniQrGate from '../components/OmniQrGate'; // Ajouté
-import AirdropBanner from '../components/AirdropBanner'; // Ajouté
+import OmniQrGate from '../components/OmniQrGate';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('DASHBOARD');
 
   return (
     <main className="min-h-screen bg-[#020617] text-cyan-400 font-mono overflow-x-hidden selection:bg-cyan-500 selection:text-black">
-      {/* BANNIÈRE SUPRÊME */}
-      <AirdropBanner />
+      {/* 🛡️ BANNIÈRE SUPPRIMÉE ICI (DÉJÀ DANS LAYOUT.JS) POUR ÉVITER LE DOUBLON */}
 
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-black to-black z-0"></div>
 
@@ -25,7 +23,7 @@ export default function Home() {
         </div>
         <div className="flex gap-6">
           {['DASHBOARD', 'PARTENARIAT', 'SIMULATEUR'].map((tab) => (
-            <button 
+            <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`text-[10px] font-black tracking-[0.2em] transition-all ${activeTab === tab ? 'text-cyan-400 border-b border-cyan-400' : 'opacity-40 hover:opacity-100'}`}
@@ -42,14 +40,14 @@ export default function Home() {
             <motion.div key="dash" initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-20}} className="space-y-12">
               <FortuneCounter />
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="bg-white/5 border border-cyan-500/30 p-8 rounded-3xl backdrop-blur-xl">
+                <div className="bg-white/5 border border-cyan-500/30 p-8 rounded-3xl backdrop-blur-xl group hover:border-cyan-400 transition-all">
                    <Cpu className="text-cyan-400 mb-4" size={32} />
-                   <h3 className="text-white font-bold mb-2">AI Coordinator Status</h3>
+                   <h3 className="text-white font-bold mb-2 uppercase">AI Coordinator Status</h3>
                    <p className="text-sm opacity-60">GOD_MODE_ACTIVE | Washington D.C. Node</p>
                 </div>
-                <div className="bg-white/5 border border-purple-500/30 p-8 rounded-3xl backdrop-blur-xl">
+                <div className="bg-white/5 border border-purple-500/30 p-8 rounded-3xl backdrop-blur-xl group hover:border-purple-400 transition-all">
                    <Shield className="text-purple-400 mb-4" size={32} />
-                   <h3 className="text-white font-bold mb-2">Security Protocol</h3>
+                   <h3 className="text-white font-bold mb-2 uppercase">Security Protocol</h3>
                    <p className="text-sm opacity-60">NEMESIS_RECOVERY Enabled | SHA-256 Sealed</p>
                 </div>
               </div>
@@ -57,15 +55,15 @@ export default function Home() {
           )}
 
           {activeTab === 'PARTENARIAT' && (
-            <motion.div key="part" initial={{scale:0.9, opacity:0}} animate={{scale:1, opacity:1}} className="flex flex-col items-center py-10">
-              <h2 className="text-white text-3xl font-black italic mb-10 uppercase">Portail d'Adhésion</h2>
+            <motion.div key="part" initial={{scale:0.9, opacity:0}} animate={{scale:1, opacity:1}} exit={{opacity:1.1, opacity:0}} className="flex flex-col items-center py-10">
+              <h2 className="text-white text-3xl font-black italic mb-10 uppercase tracking-tighter">Portail d'Adhésion</h2>
               <OmniQrGate />
-              <p className="mt-8 text-[10px] opacity-40 uppercase tracking-[0.4em] animate-pulse">Scan requis pour Airtel, Canal+, Amazon...</p>
+              <p className="mt-8 text-[10px] opacity-40 uppercase tracking-[0.4em] animate-pulse">Scan requis pour Airtel, Canal+, Amazon & Tiers</p>
             </motion.div>
           )}
 
           {activeTab === 'SIMULATEUR' && (
-            <motion.div key="sim" initial={{x:50, opacity:0}} animate={{x:0, opacity:1}} className="max-w-3xl mx-auto">
+            <motion.div key="sim" initial={{x:50, opacity:0}} animate={{x:0, opacity:1}} exit={{x:-50, opacity:0}} className="max-w-3xl mx-auto">
               <RewardSimulator />
             </motion.div>
           )}
