@@ -1,24 +1,40 @@
 "use client";
 import React from 'react';
-import { QrCode, ShieldCheck, Activity } from 'lucide-react';
+import { Activity, ShieldCheck } from 'lucide-react';
 
 export default function OmniQrGate() {
+  // L'URL souveraine encodée pour les partenaires
   const GATEWAY_URL = "https://omniutil-web.vercel.app";
 
   return (
-    <div className="flex flex-col items-center p-8 bg-black/40 border-2 border-cyan-500/30 rounded-[2.5rem] backdrop-blur-xl shadow-[0_0_50px_rgba(6,182,212,0.1)] group hover:border-cyan-400 transition-all duration-500">
-      <div className="p-4 bg-white rounded-2xl mb-6 group-hover:scale-105 transition-transform duration-500">
-        {/* QR Code SVG Direct */}
-        <svg width="180" height="180" viewBox="0 0 29 29" fill="none" shapeRendering="crispEdges">
-          <path d="M0 0h7v7H0zM0 11h1v1H0zM0 15h1v1H0zM0 19h1v1H0zM0 22h7v7H0zM2 2h3v3H2zM2 24h3v3H2zM11 0h1v1h-1zM15 0h7v7h-7zM22 0h7v7h-7zM24 2h3v3h-3zM22 22h7v7h-7zM24 24h3v3h-3z" fill="#000"/>
-          <rect x="11" y="11" width="7" height="7" fill="#06b6d4" rx="1"/>
-        </svg>
+    <div className="flex flex-col items-center p-10 bg-black/60 border-2 border-cyan-500/40 rounded-[3rem] backdrop-blur-2xl shadow-[0_0_80px_rgba(6,182,212,0.15)] group hover:border-cyan-400 transition-all duration-700">
+      
+      {/* CADRE DU QR AVEC EFFET DE SCAN SCANNER LUMINEUX */}
+      <div className="relative p-6 bg-white rounded-3xl mb-8 group-hover:rotate-1 transition-transform">
+        <div className="absolute inset-0 border-2 border-cyan-500/20 rounded-3xl animate-pulse"></div>
+        
+        {/* VÉRITABLE MATRICE QR OMNIUTIL (URL ENCODÉE) */}
+        <img 
+          src={`https://api.qrserver.com{encodeURIComponent(GATEWAY_URL)}&color=06b6d4&bgcolor=ffffff&qzone=2`}
+          alt="OMNIUTIL_GATEWAY_QR"
+          className="w-[200px] h-[200px] relative z-10"
+        />
       </div>
-      <div className="text-center">
-        <h3 className="text-cyan-400 font-black tracking-widest text-xs uppercase flex items-center justify-center gap-2">
-          <Activity size={14} className="animate-pulse" /> SCANNER POUR ADHÉSION
-        </h3>
-        <p className="text-white/40 text-[9px] mt-2 font-mono">ID: OMNI_SUPREME_2026</p>
+
+      <div className="text-center space-y-3">
+        <div className="flex items-center justify-center gap-2 text-cyan-400 font-black tracking-[0.4em] text-[10px] uppercase">
+          <Activity size={14} className="animate-pulse" />
+          Scanner pour Adhésion
+        </div>
+        <div className="flex items-center justify-center gap-2 text-white/30 font-mono text-[9px]">
+          <ShieldCheck size={12} />
+          ID: OMNI_SUPREME_2026_VERIFIED
+        </div>
+      </div>
+
+      {/* INDICATION DE PUISSANCE */}
+      <div className="mt-8 pt-6 border-t border-white/5 w-full text-center">
+        <p className="text-[8px] text-cyan-500/50 uppercase tracking-[0.2em]">Protocole de liaison direct avec le Nœud Washington D.C.</p>
       </div>
     </div>
   );
