@@ -1,5 +1,4 @@
-import AirdropBanner from '../components/AirdropBanner';
-import './globals.css'; // Assure-toi que tes styles sont chargés
+import './globals.css';
 
 export default function RootLayout({ children }) {
   const jsonLd = {
@@ -15,16 +14,17 @@ export default function RootLayout({ children }) {
       <head>
         <title>OMNIUTIL | World No.1 Real Consumption Reward Protocol</title>
         <meta name="description" content="Infrastructure blockchain 4D transformant la consommation réelle en actifs liquides 24h/7j." />
-        <meta name="google-site-verification" content="hz2owb3_bM-dqzGnzGFUY5YE-a66XlFidUfv5ip54FE" />
+        <link rel="icon" href="/branding/logo.svg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body>
-        <AirdropBanner />
+        {/* LA BANNIÈRE EST SUPPRIMÉE D'ICI POUR ÉVITER LE DOUBLON */}
         {children}
       </body>
     </html>
   );
 }
+
