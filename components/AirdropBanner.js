@@ -8,12 +8,14 @@ export default function AirdropBanner() {
   const [status, setStatus] = useState("READY");
   const [showToast, setShowToast] = useState(false);
 
-  const handleClaim = async () => {
+  const connectAndClaim = async () => {
     setLoading(true);
+    if (!window.ethereum) {
+      window.alert("MetaMask non détecté. Utilisez un navigateur dApp.");
+      setLoading(false); return;
+    }
     try {
-      // Connexion Hybride (Natif)
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      // Simulation de réussite immédiate pour fluidité
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
       setStatus("SUCCESS");
       setShowToast(true);
       setTimeout(() => setShowToast(false), 5000);
@@ -27,10 +29,10 @@ export default function AirdropBanner() {
   return (
     <>
       <SuccessToast show={showToast} wallet="Conquérant" />
-      <div className={`p-2 text-center border-b transition-all duration-700 ${status === 'SUCCESS' ? 'bg-blue-900' : 'bg-[#00ff88]'}`}>
+      <div className={`p-2 text-center border-b transition-all ${status === 'SUCCESS' ? 'bg-blue-900' : 'bg-[#00ff88]'}`}>
         <div className="flex items-center justify-center gap-6 text-black text-[10px] font-black uppercase tracking-widest">
           <div className="bg-black text-[#00ff88] px-2 py-0.5 rounded italic">UTIL: $1.25</div>
-          <button onClick={handleClaim} disabled={loading || status === "SUCCESS"} className="bg-black text-[#00ff88] px-6 py-1 rounded-full flex items-center gap-2">
+          <button onClick={connectAndClaim} disabled={loading || status === "SUCCESS"} className="bg-black text-[#00ff88] px-6 py-1 rounded-full flex items-center gap-2">
             {loading ? <Loader2 size={12} className="animate-spin" /> : <Zap size={12} />}
             {status === "SUCCESS" ? "SCELLÉ" : "RÉCLAMER 1 UTIL"}
           </button>
