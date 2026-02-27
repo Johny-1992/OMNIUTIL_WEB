@@ -8,15 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "@react-three/drei": "latest",
+    "@react-three/fiber": "latest",
+    "framer-motion": "^12.34.3",
+    "gsap": "latest",
+    "lucide-react": "^0.575.0",
+    "motion-dom": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "framer-motion": "latest",
-    "motion-dom": "latest",
-    "lucide-react": "latest",
-    "three": "latest",
-    "@react-three/fiber": "latest",
-    "@react-three/drei": "latest",
-    "gsap": "latest"
+    "three": "latest"
   }
 }
