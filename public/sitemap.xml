@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org">
+<urlset xmlns="http://www.sitemaps.org" xmlns:image="http://www.google.com">
   <url>
     <loc>https://omniutil-web.vercel.app</loc>
-    <lastmod>2026-02-22</lastmod>
-    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://omniutil-web.vercel.appbranding/logo.svg</image:loc>
+      <image:title>OMNIUTIL Official Logo</image:title>
+    </image:image>
   </url>
 </urlset>
