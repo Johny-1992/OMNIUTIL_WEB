@@ -1,1 +1,2 @@
 web3==6.15.1
+vercel-kv
