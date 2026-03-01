@@ -3,7 +3,7 @@ import json
 import datetime
 import os
 from web3 import Web3
-from vercel_kv import kv # Importation de la Mémoire Éternelle
+from vercel_storage import kv # SCELLAGE OFFICIEL VERCEL STORAGE
 
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -11,7 +11,7 @@ class handler(BaseHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             post_data = json.loads(self.rfile.read(content_length))
 
-            # 1. PARAMÈTRES DE LA LOGIQUE MÈRE (INVIOLABLES)
+            # 1. PARAMÈTRES DE LA LOGIQUE MÈRE
             ANNUAL_LIMIT = 1000000
             DAILY_QUOTA = ANNUAL_LIMIT / 365
             BASE_PRICE = 1.25
@@ -36,7 +36,6 @@ class handler(BaseHTTPRequestHandler):
                         "message": "Un seul UTIL est autorisé par Conquérant."
                     }).encode('utf-8'))
                     return
-            # ---------------------------------------------------------
 
             # 3. CALCUL DE LA RARETÉ & POUSSÉE DU PRIX
             current_demand_volume = user_base if req_type == 'PARTNERSHIP' else 50000
@@ -55,7 +54,6 @@ class handler(BaseHTTPRequestHandler):
             # --- INSCRIPTION DÉFINITIVE DANS LA MÉMOIRE DE WASHINGTON ---
             if req_type == 'CLAIM' and decision == "READY":
                 kv.set(f"claimed:{wallet}", "TRUE")
-            # ---------------------------------------------------------
 
             response_payload = {
                 "status": "SCELLÉ_RÉEL_IA_COORDINATRICE",
@@ -67,13 +65,9 @@ class handler(BaseHTTPRequestHandler):
                 "judgement": {
                     "status": decision,
                     "wallet_assigned": wallet,
-                    "protocol": "NEMESIS_RECOVERY_v5.3"
+                    "protocol": "NEMESIS_RECOVERY_v5.4"
                 },
-                "details": {
-                    "tx_hash": tx_hash,
-                    "timestamp": timestamp,
-                    "node": "Washington_DC_Cloud_Active"
-                }
+                "details": { "tx_hash": tx_hash, "timestamp": timestamp, "node": "Washington_DC_Cloud_Active" }
             }
 
             self.send_response(200)
@@ -93,4 +87,3 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
-

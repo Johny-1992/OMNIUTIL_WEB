@@ -17,22 +17,26 @@ export default function Home() {
 
   const content = {
     FR: {
+      brand: "INFRASTRUCTURE OMNIUTIL",
       welcome: "BIENVENUE CONQUÉRANT",
+      homeMsg: "VOTRE PORTE D'ENTRÉE VERS L'ÉCONOMIE RÉELLE SCELLÉE SUR BLOCKCHAIN.",
       desc: "L'infrastructure N°1 mondiale transformant la consommation réelle en actifs liquides.",
       partner: "GATEWAY PARTENAIRE",
       swap: "ÉCHANGE & P2P",
       about: "À PROPOS",
       contact: "SUPPORT SUPRÊME: https://omniutil-web.vercel.app",
-      manifesto: "OMNIUTIL connecte Supermarchés, Casinos, Banques et Telcos à la Blockchain. Une rareté mathématique de 1M UTIL/an scellée à Washington D.C."
+      manifesto: "L'INFRASTRUCTURE OMNIUTIL connecte Supermarchés, Casinos, Banques et Telcos à la Blockchain. Une rareté mathématique de 1M UTIL/an scellée à Washington D.C."
     },
     EN: {
+      brand: "OMNIUTIL INFRASTRUCTURE",
       welcome: "WELCOME CONQUEROR",
+      homeMsg: "YOUR GATEWAY TO THE REAL ECONOMY SEALED ON THE BLOCKCHAIN.",
       desc: "World's No.1 infrastructure transforming real consumption into liquid assets.",
       partner: "PARTNER GATEWAY",
       swap: "SWAP & P2P",
       about: "ABOUT",
       contact: "SUPREME SUPPORT: https://omniutil-web.vercel.app",
-      manifesto: "OMNIUTIL connects Supermarkets, Casinos, Banks and Telcos to the Blockchain. A mathematical scarcity of 1M UTIL/year sealed in Washington D.C."
+      manifesto: "OMNIUTIL INFRASTRUCTURE connects Supermarkets, Casinos, Banks and Telcos to the Blockchain. A mathematical scarcity of 1M UTIL/year sealed in Washington D.C."
     }
   };
 
@@ -47,7 +51,7 @@ export default function Home() {
 
       <nav className="relative z-50 flex justify-between items-center px-6 py-6 border-b border-cyan-500/20 backdrop-blur-md bg-black/60 sticky top-0">
         <div className="text-2xl font-black italic text-white tracking-tighter flex items-center gap-3">
-          <Logo size={32} /> OMNIUTIL<span className="text-cyan-500">.IO</span>
+          <Logo size={32} /> {t.brand}
         </div>
         <div className="hidden md:flex gap-8 text-[9px] font-black tracking-widest uppercase">
           {['HOME', 'DASHBOARD', 'PARTNER', 'SWAP', 'ABOUT'].map((id) => (
@@ -65,7 +69,8 @@ export default function Home() {
         <AnimatePresence mode="wait">
           {activeTab === 'HOME' && (
             <motion.div key="h" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="text-center py-20">
-              <h1 className="text-5xl md:text-8xl font-black text-white italic uppercase tracking-tighter mb-8">{t.welcome}</h1>
+              <h1 className="text-5xl md:text-8xl font-black text-white italic uppercase tracking-tighter mb-4">{t.welcome}</h1>
+              <p className="text-cyan-500 text-[10px] font-bold tracking-[0.4em] mb-8">{t.homeMsg}</p>
               <p className="max-w-2xl mx-auto text-xs opacity-60 leading-loose uppercase mb-10 tracking-[0.2em]">{t.desc}</p>
               <div className="flex justify-center gap-6">
                 <button onClick={() => setActiveTab('PARTNER')} className="bg-cyan-500 text-black px-10 py-4 rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg shadow-cyan-500/20 hover:scale-105 transition-all">{t.partner}</button>
@@ -92,7 +97,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-white/10">
                 <div className="flex flex-col items-center gap-3">
                   <Database className="text-cyan-400" size={24} />
-                  <span className="text-[9px] font-black uppercase">Mémoire : Vercel_KV Scellée</span>
+                  <span className="text-[9px] font-black uppercase">Mémoire : Vercel_Storage Scellée</span>
                 </div>
                 <div className="flex flex-col items-center gap-3">
                   <Cpu className="text-purple-400" size={24} />
