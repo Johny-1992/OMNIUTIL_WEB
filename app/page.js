@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, ShieldCheck, Globe, Activity, Repeat, Send, Info, Mail, Smartphone } from 'lucide-react';
-import { QRCodeSVG } from 'qrcode.react'; 
+import { Zap, ShieldCheck, Globe, Repeat, Send, Cpu, Database, BarChart3 } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import Logo from '../components/Logo';
 import RewardSimulator from '../components/RewardSimulator';
 import FortuneCounter from '../components/FortuneCounter';
@@ -22,8 +22,8 @@ export default function Home() {
       partner: "GATEWAY PARTENAIRE",
       swap: "ÉCHANGE & P2P",
       about: "À PROPOS",
-      contact: "CONTACT: https://omniutil-web.vercel.app",
-      logic: "LOGIQUE MÈRE ACTIVÉE"
+      contact: "SUPPORT SUPRÊME: https://omniutil-web.vercel.app",
+      manifesto: "OMNIUTIL connecte Supermarchés, Casinos, Banques et Telcos à la Blockchain. Une rareté mathématique de 1M UTIL/an scellée à Washington D.C."
     },
     EN: {
       welcome: "WELCOME CONQUEROR",
@@ -31,8 +31,8 @@ export default function Home() {
       partner: "PARTNER GATEWAY",
       swap: "SWAP & P2P",
       about: "ABOUT",
-      contact: "CONTACT: https://omniutil-web.vercel.app",
-      logic: "MOTHER LOGIC ACTIVE"
+      contact: "SUPREME SUPPORT: https://omniutil-web.vercel.app",
+      manifesto: "OMNIUTIL connects Supermarkets, Casinos, Banks and Telcos to the Blockchain. A mathematical scarcity of 1M UTIL/year sealed in Washington D.C."
     }
   };
 
@@ -42,10 +42,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#020617] text-cyan-400 font-mono">
       <AirdropBanner lang={lang} />
-      
+
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900/5 via-black to-black z-0 pointer-events-none"></div>
 
-      {/* NAV STYLE BINANCE */}
       <nav className="relative z-50 flex justify-between items-center px-6 py-6 border-b border-cyan-500/20 backdrop-blur-md bg-black/60 sticky top-0">
         <div className="text-2xl font-black italic text-white tracking-tighter flex items-center gap-3">
           <Logo size={32} /> OMNIUTIL<span className="text-cyan-500">.IO</span>
@@ -80,34 +79,48 @@ export default function Home() {
               <div className="p-8 bg-white rounded-[3rem] shadow-[0_0_80px_rgba(6,182,212,0.3)]">
                 <QRCodeSVG value="https://omniutil-web.vercel.app" size={240} fgColor="#000000" />
               </div>
-              <div className="text-[10px] opacity-40 uppercase tracking-[0.4em] animate-pulse">SCELLÉ: OMNI_SUPREME_2026_VERIFIED</div>
+              <p className="text-[10px] opacity-60 max-w-md text-center uppercase tracking-widest">Scannez pour intégrer votre Écosystème (Casino, Bank, Retail) au Protocole Nemesis.</p>
+            </motion.div>
+          )}
+
+          {activeTab === 'ABOUT' && (
+            <motion.div key="a" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-4xl mx-auto text-center space-y-12 py-10">
+              <h2 className="text-white text-5xl font-black italic uppercase tracking-tighter">PROTOCOLE SUPRÊME v5.4</h2>
+              <p className="text-[12px] leading-loose opacity-80 uppercase tracking-[0.2em] text-center max-w-3xl mx-auto">
+                {t.manifesto}
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-white/10">
+                <div className="flex flex-col items-center gap-3">
+                  <Database className="text-cyan-400" size={24} />
+                  <span className="text-[9px] font-black uppercase">Mémoire : Vercel_KV Scellée</span>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <Cpu className="text-purple-400" size={24} />
+                  <span className="text-[9px] font-black uppercase">IA : Washington_Node_3.12</span>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <BarChart3 className="text-green-400" size={24} />
+                  <span className="text-[9px] font-black uppercase">Rareté : 1M UTIL / AN</span>
+                </div>
+              </div>
+              <div className="text-[10px] font-black uppercase text-cyan-500 tracking-[0.4em]">
+                {t.contact}
+              </div>
             </motion.div>
           )}
 
           {activeTab === 'SWAP' && (
             <motion.div key="s" initial={{x:50, opacity:0}} animate={{x:0, opacity:1}} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <div className="p-10 bg-cyan-500/5 border border-cyan-500/20 rounded-[2.5rem] backdrop-blur-xl">
+              <div className="p-10 bg-cyan-500/5 border border-cyan-500/20 rounded-[2.5rem] backdrop-blur-xl transition-all hover:bg-cyan-500/10">
                 <Repeat className="mb-6 text-cyan-400" size={32} />
                 <h3 className="text-white font-bold mb-6 italic uppercase">UTIL / USDT SWAP</h3>
                 <button className="w-full py-5 bg-cyan-500 text-black font-black text-[11px] rounded-2xl uppercase tracking-widest shadow-lg">EXECUTER LE SWAP</button>
               </div>
-              <div className="p-10 bg-purple-500/5 border border-purple-500/20 rounded-[2.5rem] backdrop-blur-xl">
+              <div className="p-10 bg-purple-500/5 border border-purple-500/20 rounded-[2.5rem] backdrop-blur-xl transition-all hover:bg-purple-500/10">
                 <Send className="mb-6 text-purple-400" size={32} />
                 <h3 className="text-white font-bold mb-6 italic uppercase">TRANSFERT P2P</h3>
-                <input placeholder="ADRESSE DU CONQUÉRANT (0x...)" className="w-full bg-black/50 border border-zinc-800 p-4 rounded-xl mb-6 text-[10px] text-white outline-none focus:border-purple-500"/>
+                <input placeholder="ADRESSE (0x...)" className="w-full bg-black/50 border border-zinc-800 p-4 rounded-xl mb-6 text-[10px] text-white outline-none focus:border-purple-500"/>
                 <button className="w-full py-5 bg-purple-600 text-white font-black text-[11px] rounded-2xl uppercase tracking-widest">ENVOYER UTIL</button>
-              </div>
-            </motion.div>
-          )}
-
-          {activeTab === 'ABOUT' && (
-            <motion.div key="a" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl mx-auto text-center space-y-10 py-10">
-              <h2 className="text-white text-4xl font-black italic uppercase tracking-tighter">INFRASTRUCTURE SUPRÊME</h2>
-              <p className="text-[11px] leading-loose opacity-60 uppercase tracking-[0.2em] text-center">
-                Le protocole OMNIUTIL connecte les flux de consommation mondiale à la liquidité blockchain. Chaque scan, chaque achat génère une valeur réelle.
-              </p>
-              <div className="pt-10 border-t border-white/10 flex justify-center text-[10px] font-black uppercase text-cyan-500">
-                {t.contact}
               </div>
             </motion.div>
           )}
