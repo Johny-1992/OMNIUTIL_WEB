@@ -9,39 +9,41 @@ export default function AirdropBanner({ lang = 'FR' }) {
   const [showToast, setShowToast] = useState(false);
   const [wallet, setWallet] = useState("");
 
-  // VÉRIFICATION LOCALE AU CHARGEMENT POUR ÉVITER LE DOUBLE CLIC
   useEffect(() => {
     const hasClaimed = localStorage.getItem('omni_claimed');
     if (hasClaimed) setStatus("SUCCESS");
   }, []);
 
   const connectAndClaim = async () => {
-    if (status === "SUCCESS") return; // VERROU DE SÉCURITÉ ABSOLU
-    
-    setLoading(true);
-    let provider = window.ethereum;
+    if (status === "SUCCESS") return;
 
-    if (provider?.providers) {
-      provider = provider.providers.find(p => p.isMetaMask);
-    }
+    setLoading(true);
+    
+    // 1. DÉTECTION UNIVERSELLE (SOUVERAINETÉ TOTALE)
+    // On accepte window.ethereum (MetaMask, Trust, Coinbase, Brave, etc.)
+    const provider = window.ethereum;
 
     if (!provider) {
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       if (isMobile) {
+        // Redirection vers le Deep Link universel si aucun provider n'est injecté
         window.location.href = "https://metamask.app.link";
       } else {
-        window.alert(lang === 'FR' ? "METAMASK NON DÉTECTÉ." : "METAMASK NOT DETECTED.");
+        window.alert(lang === 'FR' ? 
+          "AUCUN WALLET DÉTECTÉ : Veuillez utiliser un navigateur dApp (Trust Wallet, MetaMask, etc.)." : 
+          "NO WALLET DETECTED: Please use a dApp browser (Trust Wallet, MetaMask, etc.).");
       }
       setLoading(false);
       return;
     }
 
     try {
+      // 2. CONNEXION MULTI-WALLET
       const accounts = await provider.request({ method: 'eth_requestAccounts' });
       const userAddress = accounts[0];
       setWallet(userAddress);
 
-      // APPEL AU NŒUD DE WASHINGTON AVEC VÉRIFICATION DE FRAUDE
+      // 3. APPEL AU NŒUD DE WASHINGTON (VÉRIFICATION MÉMOIRE ÉTERNELLE)
       const response = await fetch('/api/claim', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -50,16 +52,16 @@ export default function AirdropBanner({ lang = 'FR' }) {
 
       const result = await response.json();
 
-      // SI L'IA COORDINATRICE DÉTECTE UNE FRAUDE
       if (result.status === "REFUSÉ_FRAUDE_DÉTECTÉE") {
-        window.alert(lang === 'FR' ? "ERREUR : Réclamation multiple bloquée." : "ERROR: Multiple claims blocked.");
+        window.alert(lang === 'FR' ? "ERREUR : Réclamation déjà scellée pour ce wallet." : "ERROR: Claim already sealed for this wallet.");
         setStatus("SUCCESS");
+        localStorage.setItem('omni_claimed', 'true');
         return;
       }
 
       // SCELLAGE RÉUSSI
       setStatus("SUCCESS");
-      localStorage.setItem('omni_claimed', 'true'); // Verrouillage permanent sur ce navigateur
+      localStorage.setItem('omni_claimed', 'true');
       setShowToast(true);
       setTimeout(() => setShowToast(false), 6000);
 
