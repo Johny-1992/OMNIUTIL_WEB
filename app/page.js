@@ -82,15 +82,20 @@ export default function Home() {
             <motion.div key="p" initial={{scale:0.9, opacity:0}} animate={{scale:1, opacity:1}} className="flex flex-col items-center py-10 space-y-10">
               <h2 className="text-white text-3xl font-black italic uppercase tracking-tighter">{t.partner}</h2>
               <div className="p-8 bg-white rounded-[3rem] shadow-[0_0_80px_rgba(6,182,212,0.3)]">
+                {/* RECTIFICATION SOUVERAINE : REDIRECTION VERS LA GATEWAY DE JUGEMENT */}
                 <QRCodeSVG value="https://omniutil-web.vercel.app" size={240} fgColor="#000000" />
               </div>
-              <p className="text-[10px] opacity-60 max-w-md text-center uppercase tracking-widest">Scannez pour intégrer votre Écosystème (Casino, Bank, Retail) au Protocole Nemesis.</p>
+              <p className="text-[10px] opacity-60 max-w-md text-center uppercase tracking-widest">
+                {lang === 'FR' 
+                  ? "Admin : Scannez pour déclencher le jugement de l'IA Coordinatrice et greffer votre écosystème." 
+                  : "Admin: Scan to trigger AI Coordinator judgement and graft your ecosystem."}
+              </p>
             </motion.div>
           )}
 
           {activeTab === 'ABOUT' && (
             <motion.div key="a" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-4xl mx-auto text-center space-y-12 py-10">
-              <h2 className="text-white text-5xl font-black italic uppercase tracking-tighter">PROTOCOLE SUPRÊME v5.4</h2>
+              <h2 className="text-white text-5xl font-black italic uppercase tracking-tighter">PROTOCOLE SUPRÊME v5.5</h2>
               <p className="text-[12px] leading-loose opacity-80 uppercase tracking-[0.2em] text-center max-w-3xl mx-auto">
                 {t.manifesto}
               </p>
