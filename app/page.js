@@ -84,7 +84,7 @@ export default function Home() {
               <div className="p-8 bg-white rounded-[3rem] shadow-[0_0_80px_rgba(6,182,212,0.3)]">
                 {/* RÉVOCATION DE L'ACCUEIL : DIRECTION VERS LE JUGEMENT IA */}
                 <QRCodeSVG value="https://omniutil-web.vercel.app" size={240} fgColor="#000000" />
-              </div>
+<QRCodeSVG value="https://omniutil-web.vercel.app" size={240} fgColor="#000000" />
               <p className="text-[10px] opacity-60 max-w-md text-center uppercase tracking-widest">
                 {lang === 'FR'
                   ? "Admin : Scannez pour déclencher le jugement de l'IA Coordinatrice et greffer votre écosystème."
