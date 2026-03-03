@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, ShieldCheck, Globe, Repeat, Send, Cpu, Database, BarChart3 } from 'lucide-react';
+import { Zap, ShieldCheck, Globe, Repeat, Send, Cpu, Database, BarChart3, Wallet } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import Logo from '../components/Logo';
 import RewardSimulator from '../components/RewardSimulator';
@@ -47,7 +47,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#020617] text-cyan-400 font-mono">
       <AirdropBanner lang={lang} />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900/5 via-black to-black z-0 pointer-events-none"></div>
-      
+
       <nav className="relative z-50 flex justify-between items-center px-6 py-6 border-b border-cyan-500/20 backdrop-blur-md bg-black/60 sticky top-0">
         <div className="text-2xl font-black italic text-white tracking-tighter flex items-center gap-3">
           <Logo size={32} /> {t.brand}
@@ -81,11 +81,49 @@ export default function Home() {
             <motion.div key="p" initial={{scale:0.9, opacity:0}} animate={{scale:1, opacity:1}} className="flex flex-col items-center py-10 space-y-10">
               <h2 className="text-white text-3xl font-black italic uppercase tracking-tighter">{t.partner}</h2>
               <div className="p-8 bg-white rounded-[3rem] shadow-[0_0_80px_rgba(6,182,212,0.3)]">
+                {/* QR CODE SCELLÉ : REDIRECTION VERS LA PORTE D'ORION */}
                 <QRCodeSVG value="https://omniutil-web.vercel.app" size={240} fgColor="#000000" />
               </div>
               <p className="text-[10px] opacity-60 max-w-md text-center uppercase tracking-widest">
-                Admin : Scannez pour déclencher le jugement de l'IA Coordinatrice.
+                ADMIN : Scannez pour déclencher le jugement de l'IA Coordinatrice et greffer votre écosystème au protocole.
               </p>
+            </motion.div>
+          )}
+
+          {activeTab === 'SWAP' && (
+            <motion.div key="s" initial={{x:50, opacity:0}} animate={{x:0, opacity:1}} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* SWAP LIQUIDITÉ */}
+              <div className="p-8 bg-cyan-500/5 border border-cyan-500/20 rounded-[2.5rem] backdrop-blur-xl">
+                <Repeat className="mb-4 text-cyan-400" size={32} />
+                <h3 className="text-white font-bold mb-2 uppercase italic">Swap UTIL / USDT</h3>
+                <p className="text-[9px] mb-6 opacity-50 uppercase">Conversion instantanée scellée par l'IA</p>
+                <input placeholder="0.00 UTIL" className="w-full bg-black/50 border border-zinc-800 p-4 rounded-xl mb-4 text-white text-xs outline-none focus:border-cyan-500"/>
+                <button className="w-full py-4 bg-cyan-500 text-black font-black text-[10px] rounded-xl uppercase tracking-widest">Exécuter le Swap</button>
+              </div>
+
+              {/* TRANSFERT P2P */}
+              <div className="p-8 bg-purple-500/5 border border-purple-500/20 rounded-[2.5rem] backdrop-blur-xl">
+                <Send className="mb-4 text-purple-400" size={32} />
+                <h3 className="text-white font-bold mb-2 uppercase italic">Transfert P2P</h3>
+                <p className="text-[9px] mb-6 opacity-50 uppercase">Envoi entre abonnés du même écosystème</p>
+                <input placeholder="Adresse 0x..." className="w-full bg-black/50 border border-zinc-800 p-4 rounded-xl mb-4 text-white text-xs outline-none focus:border-purple-500"/>
+                <button className="w-full py-4 bg-purple-600 text-white font-black text-[10px] rounded-xl uppercase tracking-widest">Envoyer UTIL</button>
+              </div>
+
+              {/* ÉCHANGE DE SERVICES */}
+              <div className="md:col-span-2 p-8 bg-green-500/5 border border-green-500/20 rounded-[2.5rem] backdrop-blur-xl text-center">
+                <Zap className="mx-auto mb-4 text-green-400" size={32} />
+                <h3 className="text-white font-bold mb-2 uppercase italic">Échanger en Services Partenaires</h3>
+                <p className="text-[9px] mb-8 opacity-50 uppercase tracking-widest">Utilisez vos UTIL pour recharger Canal+, Data Airtel, Vodacom, Électricité</p>
+                <div className="flex flex-wrap justify-center gap-4 mb-8">
+                  {['AIRTEL DATA', 'CANAL+', 'VODACOM CREDIT', 'REGIDESO'].map(s => (
+                    <button key={s} className="px-6 py-2 border border-green-500/20 rounded-lg text-[8px] font-black hover:bg-green-500/10 transition-all">{s}</button>
+                  ))}
+                </div>
+                <button className="w-full py-5 border-2 border-green-500 text-green-500 font-black text-[10px] rounded-2xl uppercase tracking-widest hover:bg-green-500 hover:text-black transition-all">
+                  Générer Code de Recharge (Paiement UTIL)
+                </button>
+              </div>
             </motion.div>
           )}
 
@@ -112,3 +150,4 @@ export default function Home() {
     </main>
   );
 }
+
