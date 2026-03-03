@@ -19,7 +19,7 @@ export default function Home() {
     FR: {
       brand: "INFRASTRUCTURE OMNIUTIL",
       welcome: "BIENVENUE CONQUÉRANT",
-      homeMsg: "VOTRE PORTE D'ENTRÉE VERS L'ÉCONOMIE RÉELLE SCELLÉE SUR BLOCKCHAIN.",
+      homeMsg: "VOTRE PORTE d'ENTRÉE VERS L'ÉCONOMIE RÉELLE SCELLÉE SUR BLOCKCHAIN.",
       desc: "L'infrastructure N°1 mondiale transformant la consommation réelle en actifs liquides.",
       partner: "GATEWAY PARTENAIRE",
       swap: "ÉCHANGE & P2P",
@@ -82,12 +82,12 @@ export default function Home() {
             <motion.div key="p" initial={{scale:0.9, opacity:0}} animate={{scale:1, opacity:1}} className="flex flex-col items-center py-10 space-y-10">
               <h2 className="text-white text-3xl font-black italic uppercase tracking-tighter">{t.partner}</h2>
               <div className="p-8 bg-white rounded-[3rem] shadow-[0_0_80px_rgba(6,182,212,0.3)]">
-                {/* RECTIFICATION SOUVERAINE : REDIRECTION VERS LA GATEWAY DE JUGEMENT */}
+                {/* RÉVOCATION DE L'ACCUEIL : DIRECTION VERS LE JUGEMENT IA */}
                 <QRCodeSVG value="https://omniutil-web.vercel.app" size={240} fgColor="#000000" />
               </div>
               <p className="text-[10px] opacity-60 max-w-md text-center uppercase tracking-widest">
-                {lang === 'FR' 
-                  ? "Admin : Scannez pour déclencher le jugement de l'IA Coordinatrice et greffer votre écosystème." 
+                {lang === 'FR'
+                  ? "Admin : Scannez pour déclencher le jugement de l'IA Coordinatrice et greffer votre écosystème."
                   : "Admin: Scan to trigger AI Coordinator judgement and graft your ecosystem."}
               </p>
             </motion.div>
