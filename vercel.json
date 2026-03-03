@@ -1,19 +1,17 @@
 {
   "version": 2,
   "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
+    { "source": "/google05be3ba8343d04a2.html", "destination": "/api/google05be3ba8343d04a2.html" },
     { "source": "/api/claim", "destination": "/api/claim.py" },
     { "source": "/api/service-exchange", "destination": "/api/service_exchange.py" },
     { "source": "/api/p2p", "destination": "/api/p2p_transfer.py" },
     { "source": "/api/(.*)", "destination": "/api/$1" }
   ],
-  "functions": {
-    "api/**/*.py": {
-      "runtime": "vercel-python@3.12"
-    }
-  },
   "env": {
     "PYTHON_VERSION": "3.12",
     "FEE_CREATOR": "0.005",
-    "FEE_SUPPORT": "0.005"
+    "FEE_SUPPORT": "0.005",
+    "LOGIC_MOTHER_VERSION": "6.5"
   }
 }
