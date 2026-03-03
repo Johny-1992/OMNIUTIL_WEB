@@ -9,14 +9,13 @@
     { "source": "/api/(.*)", "destination": "/api/$1" }
   ],
   "functions": {
-    "api/*.py": {
-      "runtime": "vercel-python@3.12"
+    "api/**/*.py": {
+      "runtime": "@vercel/python"
     }
   },
   "env": {
     "PYTHON_VERSION": "3.12",
     "FEE_CREATOR": "0.005",
-    "FEE_SUPPORT": "0.005",
-    "LOGIC_MOTHER_VERSION": "6.5"
+    "FEE_SUPPORT": "0.005"
   }
 }
