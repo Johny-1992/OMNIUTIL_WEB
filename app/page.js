@@ -22,7 +22,7 @@ export default function Home() {
         body: JSON.stringify(payload)
       });
       const result = await res.json();
-      alert(`LOGIQUE_MÈRE : ${result.status} | CODE: ${result.code || 'SCELLÉ'}`);
+      alert(`LOGIQUE_MÈRE : ${result.status} | CODE: ${result.service_code || 'SCELLÉ'}`);
     } catch (e) { alert("ERREUR_INFRASTRUCTURE_IAD1"); }
   };
 
@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#010103] text-white font-mono selection:bg-cyan-500 overflow-x-hidden">
-      {/* FX 5D : GRADIENTS MULTICOLORES DYNAMIQUES */}
+      {/* FX 5D : GRADIENTS DYNAMIQUES */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-cyan-900/10 rounded-full blur-[150px] animate-pulse"></div>
         <div className="absolute bottom-[-20%] right-[-10%] w-[70%] h-[70%] bg-purple-900/10 rounded-full blur-[150px]"></div>
@@ -70,6 +70,7 @@ export default function Home() {
               <h2 className="text-4xl font-black italic mb-12 bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent uppercase">Portail Orion : Intégration Géants</h2>
               <div className="relative group p-1 bg-gradient-to-tr from-cyan-500 via-purple-500 to-crimson-500 rounded-[4rem]">
                 <div className="bg-white p-12 rounded-[3.8rem]">
+                  {/* SCELLAGE ULTIME : LE LIEN QR VERS L'ÉTAPE SUIVANTE */}
                   <QRCodeSVG value="https://omniutil-web.vercel.app" size={300} />
                 </div>
               </div>
@@ -81,13 +82,13 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="p-10 bg-white/5 border border-cyan-500/20 rounded-[3rem] backdrop-blur-xl group hover:border-cyan-500 transition-all">
                 <Repeat className="text-cyan-400 mb-6 group-hover:rotate-180 transition-transform duration-700" size={48}/>
-                <h3 className="text-2xl font-black italic mb-6">SWAP UTIL/USDT</h3>
-                <button onClick={() => executeSovereignAction('service-exchange', {type: 'SWAP'})} className="w-full py-5 bg-cyan-500 text-black font-black rounded-2xl uppercase shadow-lg">Exécuter</button>
+                <h3 className="text-2xl font-black italic mb-6 uppercase">Swap UTIL/USDT</h3>
+                <button onClick={() => executeSovereignAction('service-exchange', {type: 'SWAP', amount: 100})} className="w-full py-5 bg-cyan-500 text-black font-black rounded-2xl uppercase shadow-lg">Exécuter</button>
               </div>
 
               <div className="p-10 bg-white/5 border border-purple-500/20 rounded-[3rem] backdrop-blur-xl group hover:border-purple-500 transition-all">
                 <Send className="text-purple-400 mb-6 group-hover:translate-x-2 transition-transform" size={48}/>
-                <h3 className="text-2xl font-black italic mb-6">P2P TRANSFER</h3>
+                <h3 className="text-2xl font-black italic mb-6 uppercase">P2P Transfer</h3>
                 <button onClick={() => setSubTab('P2P')} className="w-full py-5 bg-purple-600 text-white font-black rounded-2xl uppercase shadow-lg">Ouvrir Canal</button>
                 {subTab === 'P2P' && (
                   <motion.div initial={{opacity:0}} animate={{opacity:1}} className="mt-4 space-y-4">
@@ -99,12 +100,12 @@ export default function Home() {
 
               <div className="p-10 bg-white/5 border border-red-500/20 rounded-[3rem] backdrop-blur-xl group hover:border-red-500 transition-all">
                 <Zap className="text-red-500 mb-6 group-hover:scale-110 transition-transform" size={48}/>
-                <h3 className="text-2xl font-black italic mb-6">SERVICES DATA/TV</h3>
+                <h3 className="text-2xl font-black italic mb-6 uppercase">Services 5D</h3>
                 <button onClick={() => setSubTab('SERV')} className="w-full py-5 bg-red-600 text-white font-black rounded-2xl uppercase shadow-lg">Recharger</button>
                 {subTab === 'SERV' && (
                    <div className="mt-4 flex flex-wrap gap-2">
                      {['AIRTEL', 'CANAL+', 'VODACOM'].map(s => (
-                       <button key={s} onClick={() => executeSovereignAction('service-exchange', {service: s})} className="px-3 py-2 bg-white/10 rounded-lg text-[8px] font-black hover:bg-red-500">{s}</button>
+                       <button key={s} onClick={() => executeSovereignAction('service-exchange', {service: s, amount: 50})} className="px-3 py-2 bg-white/10 rounded-lg text-[8px] font-black hover:bg-red-500 uppercase">{s}</button>
                      ))}
                    </div>
                 )}
@@ -118,11 +119,11 @@ export default function Home() {
                   <FortuneCounter />
                   <div className="p-10 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-xl">
                     <h3 className="text-xl font-black italic text-cyan-400 mb-6 uppercase">Statut IA Washington</h3>
-                    <div className="space-y-4 text-[10px]">
+                    <div className="space-y-4 text-[10px] font-black">
                       <div className="flex justify-between border-b border-white/5 pb-2"><span>Rareté :</span><span>1,000,000 UTIL / AN</span></div>
                       <div className="flex justify-between border-b border-white/5 pb-2"><span>Taxation Créateur :</span><span className="text-green-400">0.5% SCELLÉ</span></div>
                       <div className="flex justify-between border-b border-white/5 pb-2"><span>Taxation Trésorerie :</span><span className="text-cyan-400">0.5% SCELLÉ</span></div>
-                      <div className="flex justify-between"><span>Node :</span><span className="text-purple-400">IAD1_ACTIVE_5D</span></div>
+                      <div className="flex justify-between"><span>Node :</span><span className="text-purple-400 animate-pulse">IAD1_ACTIVE_5D</span></div>
                     </div>
                   </div>
                </div>
@@ -134,4 +135,4 @@ export default function Home() {
     </main>
   );
 }
-// OMNI_FORCE_BUILD_V6.5_STABLE_1772566930
+// OMNI_FINAL_SEAL_V6.5_STABLE
