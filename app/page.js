@@ -71,7 +71,7 @@ export default function Home() {
               <div className="relative group p-1 bg-gradient-to-tr from-cyan-500 via-purple-500 to-crimson-500 rounded-[4rem]">
                 <div className="bg-white p-12 rounded-[3.8rem]">
                   {/* SCELLAGE ULTIME : LE LIEN QR VERS L'ÉTAPE SUIVANTE */}
-                  <QRCodeSVG value="https://omniutil-web.vercel.app" size={300} />
+                  <QRCodeSVG value="https://omniutil-web.vercel.app/partnership-request" size={300} />
                 </div>
               </div>
               <p className="mt-10 text-[11px] font-black text-cyan-500 animate-pulse uppercase tracking-[0.4em]">Scan to Graft Traceable Database</p>
