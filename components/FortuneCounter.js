@@ -27,7 +27,7 @@ export default function FortuneCounter() {
           <TrendingUp size={14} /> Annual Accumulation Est.
         </div>
         <div className="text-4xl font-black text-white tracking-tighter">
-          $ 5.94M <span className="text-blue-500 text-xl">USDT</span>
+          $ 19.80M <span className="text-blue-500 text-xl">USDT</span>
         </div>
       </div>
     </div>
