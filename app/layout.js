@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="fr">
-      <head>
+      <head><link rel="icon" href="/logo.png" /><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","url":"https://omniutil-web.vercel.app","logo":"https://omniutil-web.vercel.app/logo.png","name":"OMNIUTIL","description":"Infrastructure RWA Souveraine - Ticket CMC #1336140"}</script>
         {/* LE LINK ICON EST DÉJÀ DANS METADATA, MAIS ON LE GARDE POUR LA SÉCURITÉ */}
         <link rel="icon" href="/branding/logo.svg" />
         <script
