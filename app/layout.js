@@ -9,7 +9,6 @@ export const metadata = {
     shortcut: '/branding/logo.svg',
     apple: '/branding/logo.svg',
   },
-  // FORCE L'AFFICHAGE DU LOGO SUR LES RÉSEAUX SOCIAUX & MOTEURS DE RECHERCHE
   openGraph: {
     title: 'OMNIUTIL Infrastructure',
     description: 'World No.1 Real Consumption Reward Protocol',
@@ -18,7 +17,6 @@ export const metadata = {
     images: [{ url: '/branding/logo.svg' }],
     type: 'website',
   },
-  // BALISE EXPÉRIMENTALE RECONNUE PAR CERTAINS WALLETS CRYPTO
   other: {
     'eth-token-icon': 'https://omniutil-web.vercel.app/branding/logo.svg',
     'google-site-verification': 'hz2owb3_bM-dqzGnzGFUY5YE-a66XlFidUfv5ip54FE'
@@ -31,14 +29,13 @@ export default function RootLayout({ children }) {
     "@type": "Organization",
     "url": "https://omniutil-web.vercel.app",
     "logo": "https://omniutil-web.vercel.app/branding/logo.svg",
-    "image": "https://omniutil-web.vercel.app/branding/logo.svg", // Doublé pour Google Images
-    "name": "OMNIUTIL Infrastructure"
+    "name": "OMNIUTIL Infrastructure",
+    "description": "Infrastructure RWA Souveraine - Ticket CMC #1336140"
   };
 
   return (
     <html lang="fr">
-        <head><link rel="icon" href="/logo.png" /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context": "https://schema.org", "@type": "Organization", "url": "https://omniutil-web.vercel.app", "logo": "https://omniutil-web.vercel.app/logo.png", "name": "OMNIUTIL", "description": "Infrastructure RWA Souveraine - Ticket CMC #1336140"}) }} /></head>
-        {/* LE LINK ICON EST DÉJÀ DANS METADATA, MAIS ON LE GARDE POUR LA SÉCURITÉ */}
+      <head>
         <link rel="icon" href="/branding/logo.svg" />
         <script
           type="application/ld+json"
@@ -46,9 +43,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        {/* LA BANNIÈRE RESTE SUPPRIMÉE POUR ÉVITER LE DOUBLON */}
         {children}
       </body>
     </html>
   );
 }
+
