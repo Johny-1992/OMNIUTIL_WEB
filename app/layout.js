@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang={locale}, "en", "es", "zh">
+    <html lang="fr">
       <head>
         <link rel="icon" href="/branding/logo.svg" />
         <script
