@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { DollarSign, TrendingUp } from 'lucide-react';
 
 export default function FortuneCounter() {
-  const [balance, setBalance] = useState(300000.00);
+  const [balance, setBalance] = useState(750000.00);
 
   useEffect(() => {
     const interval = setInterval(() => {
