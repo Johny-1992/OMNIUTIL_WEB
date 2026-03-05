@@ -20,7 +20,7 @@ class handler(BaseHTTPRequestHandler):
 
             # 3. BOUCLIER D'ÉPUISEMENT (Calcul du Quota de Survie)
             # On simule un stock restant (ceci sera lié à la BSC après l'ownership)
-            annual_supply = 1000000
+            annual_supply = 750000
             today = datetime.date.today()
             days_left = (datetime.date(today.year, 12, 31) - today).days + 1
             daily_quota = annual_supply / days_left
