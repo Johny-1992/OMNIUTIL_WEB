@@ -7,26 +7,26 @@ class handler(BaseHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             data = json.loads(self.rfile.read(content_length))
 
-            # PROTOCOLE DE MÉXITOCRATIE : Capture Directe par Webhook
-            # Chaque requête doit contenir l'ID de Facturation Original (Gage Réel)
+            # 1. GÉNÉRATEUR DE WALLET UNIQUE (Liaison Identifiant -> 0x Address)
+            user_id = data.get('user_id') # Ex: +243... ou Numéro Canal+
+            partner_id = data.get('service', 'GLOBAL')
+            
+            if user_id:
+                # On crée un hash unique combinant le Partenaire et l'ID Client
+                seed = f"{partner_id}:{user_id}".encode()
+                deterministic_wallet = "0x" + hashlib.sha256(seed).hexdigest()[:40]
+            else:
+                deterministic_wallet = data.get('wallet', '0xNULL')
+
+            # 2. CAPTURE DU GAGE (Billing ID Obligatoire)
             billing_id = data.get('billing_id')
             if not billing_id:
-                raise ValueError("ERREUR_TRAÇABILITÉ : ID de Facturation Partenaire Manquant")
+                raise ValueError("ERREUR_TRAÇABILITÉ : ID de Facturation Manquant")
 
-            declared_rate = float(data.get('declared_rate', 0.5)) / 100
+            # 3. CALCUL SCRIPTURAIRE & RARETÉ
             amount = float(data.get('amount', 0))
-            
-            # SÉCURITÉ : Royalties 0.5% (Creator) / 0.5% (Treasury)
-            creator_royalty = amount * 0.005
-            support_royalty = amount * 0.005
-
-            # RÉGULATION RARETÉ & QUOTA JOURNALIER
-            annual_supply = 750000
-            days_left = (datetime.date(datetime.date.today().year, 12, 31) - datetime.date.today()).days + 1
-            daily_quota = annual_supply / days_left
-            
-            reward_util = min(amount * declared_rate, daily_quota, 100)
-            status = "CAPTURE_DIRECTE_VALIDÉE" if reward_util < 100 else "RÉGULATION_FRAUDE_DÉTECTÉE"
+            rate = float(data.get('declared_rate', 0.1)) / 100
+            reward_util = min(amount * rate, 100) # Bouclier Anti-Fraude
 
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
@@ -34,11 +34,12 @@ class handler(BaseHTTPRequestHandler):
             self.end_headers()
 
             self.wfile.write(json.dumps({
-                "status": status,
-                "billing_id": billing_id,
+                "status": "CAPTURE_DIRECTE_SCELLÉE",
+                "user_id": user_id,
+                "assigned_wallet": deterministic_wallet,
                 "reward_util": round(reward_util, 6),
-                "royalties": {"creator": creator_royalty, "treasury": support_royalty},
-                "node": "IAD1_ACTIVE_WEBHOOK_PRO"
+                "royalties": {"creator": amount * 0.005},
+                "node": "IAD1_WASHINGTON_ULTRA_PRO"
             }).encode())
         except Exception as e:
             self.send_response(403)
