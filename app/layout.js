@@ -49,3 +49,4 @@ export default function RootLayout({ children }) {
   );
 }
 
+// OMNI_SOUVEREIGN_FORCE_v6.7: Fri Mar  6 13:43:07 UTC 2026
