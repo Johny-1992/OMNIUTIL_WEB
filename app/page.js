@@ -38,7 +38,7 @@ export default function Home() {
 
       <nav className="relative z-50 flex justify-between items-center px-10 py-8 border-b border-white/5 backdrop-blur-3xl bg-black/40 sticky top-0">
         <div className="text-3xl font-black italic tracking-tighter bg-gradient-to-r from-cyan-400 via-white to-purple-500 bg-clip-text text-transparent flex items-center gap-4">
-          <Logo size={48} /> OMNIUTIL v6.5 <span className="text-[10px] text-cyan-500 border border-cyan-500 px-2 py-1 rounded ml-2">IAD1_ACTIVE</span>
+          <Logo size={48} /> OMNIUTIL v6.6-INDUSTRIAL | AUDIT: 89.65 | RWA CERTIFIED <span className="text-[10px] text-cyan-500 border border-cyan-500 px-2 py-1 rounded ml-2">IAD1_ACTIVE</span>
         </div>
         <div className="flex gap-4">
           {['HOME', 'PARTNER', 'SWAP', 'DASHBOARD'].map(tab => (
