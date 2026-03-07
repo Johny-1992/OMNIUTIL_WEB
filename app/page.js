@@ -38,7 +38,7 @@ export default function Home() {
 
       <nav className="relative z-50 flex justify-between items-center px-10 py-8 border-b border-white/5 backdrop-blur-3xl bg-black/40 sticky top-0">
         <div className="text-3xl font-black italic tracking-tighter bg-gradient-to-r from-cyan-400 via-white to-purple-500 bg-clip-text text-transparent flex items-center gap-4">
-          <Logo size={48} /> OMNIUTIL v6.7-INDUSTRIAL | RWA CERTIFIED | SECURITY: 89.65 | AUDIT: 89.65 | RWA CERTIFIED <span className="text-[10px] text-cyan-500 border border-cyan-500 px-2 py-1 rounded ml-2">IAD1_ACTIVE</span>
+          <Logo size={48} /> OMNIUTIL v6.8-GALAXY | RWA SOUVERAIN | RWA CERTIFIED | SECURITY: 89.65 | AUDIT: 89.65 | RWA CERTIFIED <span className="text-[10px] text-cyan-500 border border-cyan-500 px-2 py-1 rounded ml-2">IAD1_ACTIVE</span>
         </div>
         <div className="flex gap-4">
           {['HOME', 'PARTNER', 'SWAP', 'DASHBOARD'].map(tab => (
@@ -57,7 +57,7 @@ export default function Home() {
                 REALITY<br/><span className="text-cyan-500 underline decoration-white/10">CODED.</span>
               </h1>
               <div className="max-w-2xl text-lg opacity-70 leading-relaxed border-l-8 border-purple-600 pl-10 mb-12 uppercase italic">
-                "Toute structure possédant une base de données traçable des consommations réelles permanentes est une mine d'or. L'IA Coordinatrice scelle la richesse."
+                "L’OMNIUTIL ne spécule pas, il administre le flux mondial. Rareté imposée à 3 650 $ par iad1."
               </div>
               <button onClick={() => setActiveTab('PARTNER')} className="group flex items-center gap-4 bg-white text-black px-12 py-6 rounded-full font-black text-sm hover:bg-cyan-400 transition-all uppercase">
                 Déployer Orion <ArrowRight className="group-hover:translate-x-2 transition-transform"/>
