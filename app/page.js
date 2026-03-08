@@ -68,7 +68,7 @@ export default function Home() {
           {/* SÉLECTEUR DE LANGUE OPÉRATIONNEL */}
           <div className="flex gap-2 ml-4 text-[10px] font-black border-l border-white/10 pl-4">
             {['FR', 'EN', 'ZH'].map(l => (
-              <span key={l} onClick={() => setLang(l)} 
+              <span key={l} onClick={() => setLang(l); localStorage.setItem('omni_lang', l)} 
                 className={`cursor-pointer transition-all ${lang === l ? 'scale-125' : 'opacity-40 hover:opacity-100'}`}
                 style={lang === l ? {color: current.color} : {}}>
                 {l}
