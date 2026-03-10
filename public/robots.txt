@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://omniutil-web.vercel.app
-# OMNIUTIL INFRASTRUCTURE // NO.1 GLOBAL REWARD PROTOCOL
+Sitemap: https://omniutil-web.vercel.appsitemaps.xml

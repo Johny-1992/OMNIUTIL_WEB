@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="fr">
-      <head>
+      <head><script type='application/ld+json'>{"@context":"https://schema.org","@type":"Organization","name":"OMNIUTIL INFRASTRUCTURE","url":"https://omniutil-web.vercel.app","description":"World #1 Trusted Infrastructure for Real Consumption Rewards."}</script>
         <link rel="icon" href="/branding/logo.svg" />
         <script
           type="application/ld+json"
