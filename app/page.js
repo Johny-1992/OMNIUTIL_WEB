@@ -1,5 +1,5 @@
-import { aboutData } from './about-content';
 "use client";
+import { aboutData } from "./about-content";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Repeat, Send, ShieldCheck, Heart, Globe, Activity } from 'lucide-react';
