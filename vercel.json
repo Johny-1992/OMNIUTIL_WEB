@@ -1,1 +1,20 @@
-{ "version": 2, "env": { "FORCE_BUILD": "1772909128" } }
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/**/*.py", "use": "@vercel/python" },
+    { "src": "app/page.js", "use": "@vercel/next" }
+  ],
+  "routes": [
+    { "src": "/api/graft", "dest": "api/partner_engine.py" },
+    { "src": "/api/exchange", "dest": "api/service_exchange.py" },
+    { "src": "/api/transfer", "dest": "api/claim.py" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ],
+  "env": {
+    "ANNUAL_LIMIT": "1000000",
+    "UTIL_PRICE": "3650",
+    "CONTRACT_BSC": "0xC8A3EA13b51C5e0a8e5c979d6A0b4BDa6bb1e76B",
+    "OWNER_WALLET": "0x40BB46B9D10Dd121e7D2150EC3784782ae648090",
+    "SUPPORTED_LANGS": "FR,EN,ZH,AR"
+  }
+}

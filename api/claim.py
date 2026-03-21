@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler
 import json
 import datetime
 import os
+import hashlib
 from vercel_storage import kv # SCELLAGE MÉMOIRE ÉTERNELLE WASHINGTON
 
 class handler(BaseHTTPRequestHandler):
@@ -10,78 +11,60 @@ class handler(BaseHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             post_data = json.loads(self.rfile.read(content_length))
 
-            # 1. PARAMÈTRES DE LA LOGIQUE MÈRE (INVIOLABLES)
+            # 1. LOIS DE L'EMPIRE (INVIOLABLES)
             ANNUAL_LIMIT = 1000000
             DAILY_QUOTA = ANNUAL_LIMIT / 365
-            BASE_PRICE = 1.25
-            FEE_CREATOR = 0.005  # 0.5% Droit d'auteur à vie
-            FEE_SUPPORT = 0.005  # 0.5% Support réseau à vie
+            PRICE_ANCHOR = 3650.96 # Rareté scellée v9.0
+            
+            # IDENTIFICATION DU PARTENAIRE ET DE L'ABONNÉ
+            user_id = post_data.get('user_id')
+            partner_name = post_data.get('name', 'GLOBAL_NODE')
+            req_type = post_data.get('type', 'CLAIM') # CLAIM, PARTNERSHIP, ou MINT_AUTO
 
-            # 2. CAPTURE & IDENTIFICATION
-            wallet = post_data.get('wallet')
-            if isinstance(wallet, list): wallet = wallet[0]
+            # 2. GÉNÉRATION DU WALLET SOUVERAIN (Zéro Friction)
+            # L'ID client (ex: numéro Airtel) devient son adresse mathématique
+            seed = f"OMNI:{partner_name}:{user_id}".encode()
+            assigned_wallet = "0x" + hashlib.sha256(seed).hexdigest()[:40]
 
-            req_type = post_data.get('type', 'CLAIM')
-            user_base = int(post_data.get('users', post_data.get('user_base', 0)))
-            partner_name = post_data.get('name', 'CONQUÉRANT_INDIVIDUEL')
+            # 3. LOGIQUE DE MINT INDUSTRIEL (Capture API)
+            amount_usd = float(post_data.get('amount', 0))
+            rate = float(post_data.get('rate', 0.1)) / 100
+            
+            # Calcul du mérite brut
+            reward_util = (amount_usd * rate) / PRICE_ANCHOR
 
-            # --- SÉCURITÉ : VÉRIFICATION DU SCELLÉ D'UNICITÉ (MARKETING 1 UTIL) ---
-            if req_type == 'CLAIM':
-                already_claimed = kv.get(f"claimed:{wallet}")
-                if already_claimed:
-                    self.send_response(200)
-                    self.send_header('Content-type', 'application/json')
-                    self.send_header('Access-Control-Allow-Origin', '*')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({
-                        "status": "REFUSÉ_FRAUDE_DÉTECTÉE",
-                        "message": "Un seul UTIL de marketing est autorisé par individu."
-                    }).encode('utf-8'))
-                    return
+            # 4. SÉCURITÉ ANTI-FRAUDE (KV STORAGE)
+            # Empêche le double-mint pour la même facture
+            billing_id = post_data.get('billing_id', 'SINGLE')
+            already_processed = kv.get(f"bill:{partner_name}:{billing_id}")
+            
+            if already_processed:
+                self.send_response(403)
+                self.end_headers()
+                self.wfile.write(json.dumps({"status": "ERROR", "message": "FACTURE_DÉJÀ_SCELLÉE"}).encode())
+                return
 
-            # 3. CALCUL DE LA RARETÉ & POUSSÉE DU PRIX (MAÎTRE DE L'INFLATION)
-            # Si partenariat, l'IA anticipe la demande massive
-            demand_impact = user_base if req_type == 'PARTNERSHIP' else 50000
-            scarcity_ratio = demand_impact / DAILY_QUOTA
-            current_market_price = BASE_PRICE * (1 + (scarcity_ratio / 450))
-
-            # 4. JUGE DES PARTENARIATS (LOGIQUE DE TRAÇABILITÉ)
-            decision = "READY"
-            if req_type == 'PARTNERSHIP':
-                # Acceptation basée sur la présence d'une base de données (user_base > 0)
-                decision = "ACCEPTÉ_SOUVERAIN" if user_base > 0 else "REFUSÉ_OPACITÉ"
-                if decision == "ACCEPTÉ_SOUVERAIN":
-                    kv.set(f"partner:{partner_name}", "ACTIVE")
-
-            # 5. PRÉPARATION DU SCELLÉ RÉEL (ABI COMPLIANT)
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # 5. SCELLAGE DE LA TRANSACTION
             tx_hash = "0x" + os.urandom(32).hex()
-
-            # INSCRIPTION DÉFINITIVE SI CLAIM UNIQUE
-            if req_type == 'CLAIM' and decision == "READY":
-                kv.set(f"claimed:{wallet}", "TRUE")
+            kv.set(f"bill:{partner_name}:{billing_id}", "PROCESSED")
 
             response_payload = {
                 "status": "SCELLÉ_RÉEL_IA_COORDINATRICE",
-                "market_control": {
-                    "price_usdt": round(current_market_price, 2),
-                    "scarcity_index": f"{round(scarcity_ratio, 2)}x",
-                    "availability": "STABLE_SCELLÉE"
-                },
-                "judgement": {
-                    "status": decision,
-                    "target": partner_name,
-                    "protocol": "NEMESIS_RECOVERY_v5.5"
+                "protocol": "OMNI_GENESIS_v9.0",
+                "merit_control": {
+                    "assigned_wallet": assigned_wallet,
+                    "mint_reward": round(reward_util, 8),
+                    "price_anchor": f"{PRICE_ANCHOR} USD"
                 },
                 "royalties_logic": {
-                    "creator_wallet_fee": "0.5%",
-                    "treasury_support_fee": "0.5%",
-                    "distribution": "PERPETUAL_AUTO"
+                    "creator_fee": "0.5%",
+                    "treasury_fee": "0.5%",
+                    "distribution": "INSTANT_AUTO"
                 },
-                "details": { 
-                    "tx_hash": tx_hash, 
-                    "timestamp": timestamp, 
-                    "node": "Washington_DC_IAD1_Active" 
+                "details": {
+                    "tx_hash": tx_hash,
+                    "node": "Washington_DC_IAD1_Active",
+                    "timestamp": datetime.datetime.now().isoformat()
                 }
             }
 
@@ -93,7 +76,6 @@ class handler(BaseHTTPRequestHandler):
 
         except Exception as e:
             self.send_response(500)
-            self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
             self.wfile.write(json.dumps({"error": str(e)}).encode())
 

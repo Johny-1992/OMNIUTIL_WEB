@@ -22,26 +22,36 @@
   },
   {
     "inputs": [
-      {"internalType": "address","name": "partner","type": "address"},
-      {"internalType": "enum OmniUtilCoreV2.PartnerLevel","name": "level","type": "uint8"},
-      {"internalType": "uint256","name": "rewardRate","type": "uint256"},
-      {"internalType": "uint256","name": "loyaltyFactor","type": "uint256"}
+      {"internalType": "address","name": "recipient","type": "address"},
+      {"internalType": "uint256","name": "amount","type": "uint256"}
     ],
-    "name": "updatePartner",
+    "name": "transferP2P",
+    "outputs": [{"internalType": "bool","name": "","type": "bool"}],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "address","name": "partner","type": "address"},
+      {"internalType": "bytes32","name": "apiSeal","type": "bytes32"}
+    ],
+    "name": "sealIndustrialGraft",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [{"internalType": "bytes32","name": "hash","type": "bytes32"}],
-    "name": "validateConsumption",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{"internalType": "address","name": "account","type": "address"}],
+    "inputs": [
+      {"internalType": "address","name": "account","type": "address"}
+    ],
     "name": "balanceOf",
+    "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getScarcityIndex",
     "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
     "stateMutability": "view",
     "type": "function"
@@ -68,10 +78,13 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "renounceOwnership",
+    "inputs": [
+      {"internalType": "bool","name": "emergency","type": "bool"}
+    ],
+    "name": "setCircuitBreaker",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   }
 ]
+
