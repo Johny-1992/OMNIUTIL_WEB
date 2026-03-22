@@ -2,15 +2,312 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: #010103;
-  color: #ffffff;
-  font-family: 'Inter', monospace;
+@layer base {
+  :root {
+    --background: 222 47% 2%;
+    --foreground: 180 100% 98%;
+    --card: 222 47% 4%;
+    --card-foreground: 180 100% 98%;
+    --popover: 222 47% 4%;
+    --popover-foreground: 180 100% 98%;
+    --primary: 188 94% 43%;
+    --primary-foreground: 222 47% 2%;
+    --secondary: 222 47% 8%;
+    --secondary-foreground: 180 100% 98%;
+    --muted: 222 47% 12%;
+    --muted-foreground: 180 30% 60%;
+    --accent: 188 94% 43%;
+    --accent-foreground: 222 47% 2%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 188 50% 15%;
+    --input: 222 47% 8%;
+    --ring: 188 94% 43%;
+    --radius: 1rem;
+    --cyan-glow: #06b6d4;
+    --deep-black: #010409;
+    --grid-color: rgba(6, 182, 212, 0.08);
+  }
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 2rem;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background: var(--deep-black);
+  }
+}
+
+/* Deep Liquid Glass Effect */
+.glass-military {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.03) 0%,
+    rgba(0, 0, 0, 0.8) 50%,
+    rgba(6, 182, 212, 0.02) 100%
+  );
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  box-shadow: 
+    0 0 0 1px rgba(6, 182, 212, 0.05) inset,
+    0 4px 30px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(6, 182, 212, 0.05);
+}
+
+.glass-military-hover:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 
+    0 0 0 1px rgba(6, 182, 212, 0.1) inset,
+    0 4px 30px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(6, 182, 212, 0.1);
+}
+
+/* Liquid Reflection Effect */
+.liquid-reflection {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-reflection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(6, 182, 212, 0.08) 50%,
+    transparent 100%
+  );
+  animation: liquid-sweep 8s ease-in-out infinite;
+}
+
+@keyframes liquid-sweep {
+  0%, 100% { left: -100%; }
+  50% { left: 100%; }
+}
+
+/* Military HUD Grid Animation */
+.military-grid {
+  background-image: 
+    linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-pulse 4s ease-in-out infinite;
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Radar Sweep Animation */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+}
+
+/* Radar Pulse Ring */
+@keyframes radar-pulse {
+  0% { 
+    transform: scale(0.8); 
+    opacity: 0.8;
+    border-color: rgba(6, 182, 212, 0.6);
+  }
+  100% { 
+    transform: scale(1.4); 
+    opacity: 0;
+    border-color: rgba(6, 182, 212, 0);
+  }
+}
+
+.radar-ring {
+  animation: radar-pulse 2s ease-out infinite;
+}
+
+.radar-ring-delay {
+  animation: radar-pulse 2s ease-out infinite;
+  animation-delay: 1s;
+}
+
+/* Scan Line Effect */
+@keyframes scan-line {
+  0% { top: 0%; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.scan-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #06b6d4, transparent);
+  animation: scan-line 3s linear infinite;
+}
+
+/* Data Stream Animation */
+@keyframes data-stream {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+.data-stream {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(6, 182, 212, 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 100% 200%;
+  animation: data-stream 2s linear infinite;
+}
+
+/* Military Terminal Text */
+.terminal-text {
+  font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Glowing Borders */
+.glow-border {
+  box-shadow: 
+    0 0 5px rgba(6, 182, 212, 0.3),
+    0 0 20px rgba(6, 182, 212, 0.1),
+    inset 0 0 20px rgba(6, 182, 212, 0.05);
+}
+
+/* Status Indicator Pulse */
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(6, 182, 212, 0); }
+}
+
+.status-active {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* Military Button Style */
+.btn-military {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.9) 0%, rgba(6, 182, 212, 0.7) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  box-shadow: 
+    0 0 20px rgba(6, 182, 212, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-military:hover {
+  box-shadow: 
+    0 0 40px rgba(6, 182, 212, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-military::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-military:hover::before {
+  left: 100%;
+}
+
+/* Corner Brackets HUD Style */
+.hud-corners {
+  position: relative;
+}
+
+.hud-corners::before,
+.hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: #06b6d4;
+  border-style: solid;
+  opacity: 0.6;
+}
+
+.hud-corners::before {
+  top: -5px;
+  left: -5px;
+  border-width: 2px 0 0 2px;
+}
+
+.hud-corners::after {
+  bottom: -5px;
+  right: -5px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Tactical Tab Style */
+.tab-military {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tab-military::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #06b6d4;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.tab-military.active::after {
+  width: 100%;
+}
+
+/* Typing Cursor Effect */
+@keyframes blink-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '_';
+  animation: blink-cursor 1s infinite;
+  color: #06b6d4;
+}
+
+/* Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.02;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Hexagon Pattern */
+.hex-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 15V45L30 60L0 45V15L30 0Z' fill='none' stroke='rgba(6,182,212,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
 }
