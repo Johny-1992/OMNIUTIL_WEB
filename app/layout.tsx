@@ -16,14 +16,14 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'OMNIUTIL | Infrastructure de Confiance n°1',
-  description: "L'OMNIUTIL est l'infrastructure de confiance n°1 mondiale de récompense sur consommation réelle. Basée sur la méritocratie, cette valeur s'applique via Code QR et IA Coordinatrice.",
+  title: 'OMNIUTIL | Infrastructure de Confiance n°1 | Military Grade',
+  description: 'Système mondial de récompense sur consommation réelle basée sur la méritocratie. Infrastructure souveraine v9.0 - Node Washington IAD1.',
   generator: 'OMNIUTIL v9.0-SOUVERAIN',
-  keywords: ['OMNIUTIL', 'blockchain', 'trust', 'meritocracy', 'sovereign', 'infrastructure'],
+  keywords: ['OMNIUTIL', 'crypto', 'blockchain', 'rewards', 'infrastructure', 'merit', 'BSC'],
   authors: [{ name: 'OMNIUTIL' }],
   openGraph: {
     title: 'OMNIUTIL | Infrastructure de Confiance n°1',
-    description: "L'infrastructure de confiance n°1 mondiale de récompense sur consommation réelle.",
+    description: 'Système mondial de récompense sur consommation réelle basée sur la méritocratie.',
     type: 'website',
   },
   icons: {

@@ -13,28 +13,28 @@ export function HeroSection({ language }: HeroSectionProps) {
     fr: {
       title: "Confiance",
       titleAccent: "Méritocratique",
-      subtitle: "L'OMNIUTIL est l'infrastructure de confiance n°1 mondiale de récompense sur consommation réelle. Basée sur la méritocratie, cette valeur s'applique via Code QR et IA Coordinatrice.",
+      subtitle: "Système mondial de récompense sur consommation réelle basée sur la méritocratie. Infrastructure souveraine v9.0 - Node Washington IAD1.",
       scanLabel: "SCANNER POUR GREFFE",
       scanSub: "DATABASE SYNC",
     },
     en: {
       title: "Meritocratic",
       titleAccent: "Trust",
-      subtitle: "OMNIUTIL is the world's #1 trust infrastructure for real consumption rewards. Based on meritocracy, this value is applied via QR Code and Coordinator AI.",
+      subtitle: "World #1 trusted infrastructure for real consumption rewards. Sovereign infrastructure v9.0 - Node Washington IAD1.",
       scanLabel: "SCAN TO GRAFT",
       scanSub: "DATABASE SYNC",
     },
     zh: {
       title: "精英",
       titleAccent: "信任",
-      subtitle: "OMNIUTIL是全球第一的真实消费奖励信任基础设施。基于精英制度，通过二维码和协调AI应用此价值。",
+      subtitle: "全球第一的真实消费奖励信任基础设施。主权基础设施 v9.0 - 华盛顿 IAD1 节点。",
       scanLabel: "扫描以嫁接",
       scanSub: "数据库同步",
     },
     ar: {
       title: "الجدارة",
       titleAccent: "الثقة",
-      subtitle: "OMNIUTIL هي البنية التحتية للثقة رقم 1 في العالم لمكافآت الاستهلاك الحقيقي. بناءً على الجدارة، يتم تطبيق هذه القيمة عبر رمز QR والذكاء الاصطناعي المنسق.",
+      subtitle: "البنية التحتية العالمية الأولى لمكافآت الاستهلاك الحقيقي. البنية التحتية السيادية v9.0 - عقدة واشنطن IAD1.",
       scanLabel: "مسح للتطعيم",
       scanSub: "مزامنة قاعدة البيانات",
     },
@@ -122,7 +122,7 @@ export function HeroSection({ language }: HeroSectionProps) {
 
               {/* QR Code with HUD */}
               <HUDQRCode 
-                value="https://omniutil-web.vercel.app/greffe" 
+                value="https://omniutilweb.vercel.app/greffe" 
                 size={220} 
               />
 
