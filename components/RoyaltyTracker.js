@@ -1,28 +1,124 @@
 "use client";
-import React from 'react';
-import { Activity } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Activity, TrendingUp, Shield, Zap } from 'lucide-react';
 
-export default function RoyaltyTracker({ color }) {
+export default function RoyaltyTracker({ color = '#06b6d4' }) {
+  const [progress, setProgress] = useState(65);
+  
+  useEffect(() => {
+    // Simulate live data fluctuation
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        const change = (Math.random() - 0.5) * 2;
+        return Math.max(60, Math.min(70, prev + change));
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="p-8 bg-white/5 border border-white/10 rounded-[2.5rem] relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-1 h-full" style={{ backgroundColor: color }}></div>
-      <div className="flex justify-between items-start mb-8">
-        <div>
-          <h3 className="text-[10px] font-black opacity-40 uppercase mb-1">Flux de Réserve</h3>
-          <p className="text-2xl font-black italic">1,000,000 <span className="text-[10px] not-italic opacity-60">UTIL / AN</span></p>
+    <div className="glass-military p-6 rounded-lg relative overflow-hidden">
+      {/* Left accent bar */}
+      <div 
+        className="absolute left-0 top-0 bottom-0 w-1 rounded-l-lg"
+        style={{ 
+          background: `linear-gradient(to bottom, ${color}, ${color}50, transparent)` 
+        }}
+      />
+      
+      {/* Scan line effect */}
+      <div className="absolute inset-0 scan-line opacity-30 pointer-events-none" />
+      
+      {/* Header */}
+      <div className="flex justify-between items-start mb-6">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <Shield size={12} className="text-cyan-500/60" />
+            <span className="text-[9px] font-bold text-cyan-500/50 uppercase tracking-widest">
+              Flux de Réserve
+            </span>
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-black" style={{ color }}>
+              1,000,000
+            </span>
+            <span className="text-[10px] font-bold text-cyan-500/40">UTIL / AN</span>
+          </div>
         </div>
-        <Activity size={20} style={{ color: color }} className="animate-pulse" />
+        
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <Activity size={20} style={{ color }} className="opacity-80" />
+        </motion.div>
       </div>
-      <div className="space-y-2">
-        <div className="flex justify-between text-[8px] font-black uppercase opacity-60">
-          <span>Injection Stable</span>
-          <span>65% Scellé</span>
+      
+      {/* Progress Section */}
+      <div className="space-y-3">
+        <div className="flex justify-between text-[8px] font-bold uppercase tracking-widest">
+          <span className="text-cyan-500/50 flex items-center gap-1">
+            <Zap size={10} />
+            Injection Stable
+          </span>
+          <span style={{ color }}>{progress.toFixed(1)}% Scellé</span>
         </div>
-        <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-          <div className="h-full transition-all duration-1000" style={{ width: '65%', backgroundColor: color }}></div>
+        
+        {/* Progress Bar with HUD style */}
+        <div className="relative h-2 w-full bg-black/60 rounded-full overflow-hidden border border-cyan-500/20">
+          {/* Grid overlay */}
+          <div 
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage: `repeating-linear-gradient(90deg, ${color}20 0px, ${color}20 1px, transparent 1px, transparent 10px)`
+            }}
+          />
+          
+          {/* Progress fill */}
+          <motion.div
+            className="h-full rounded-full relative"
+            style={{ 
+              background: `linear-gradient(90deg, ${color}80, ${color})`,
+              boxShadow: `0 0 10px ${color}60`
+            }}
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            {/* Shine effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          </motion.div>
+        </div>
+        
+        {/* Stats Grid */}
+        <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-cyan-500/10">
+          <div className="text-center">
+            <span className="block text-[8px] text-cyan-500/40 uppercase tracking-wide">Daily Rate</span>
+            <span className="block text-xs font-bold" style={{ color }}>2,740</span>
+          </div>
+          <div className="text-center border-x border-cyan-500/10">
+            <span className="block text-[8px] text-cyan-500/40 uppercase tracking-wide">Holders</span>
+            <span className="block text-xs font-bold text-green-500">12,847</span>
+          </div>
+          <div className="text-center">
+            <span className="block text-[8px] text-cyan-500/40 uppercase tracking-wide">TVL</span>
+            <span className="block text-xs font-bold text-amber-400">$47.2M</span>
+          </div>
         </div>
       </div>
-      <p className="mt-6 text-[9px] font-black opacity-30 uppercase italic">Prochain cycle : 21.01.2027</p>
+      
+      {/* Footer */}
+      <div className="mt-4 pt-3 border-t border-cyan-500/10 flex items-center justify-between">
+        <span className="text-[8px] font-bold text-cyan-500/30 uppercase tracking-widest flex items-center gap-1">
+          <TrendingUp size={10} />
+          Prochain cycle : 21.01.2027
+        </span>
+        <div className="flex items-center gap-1">
+          <div className="w-1.5 h-1.5 rounded-full bg-green-500 status-active" />
+          <span className="text-[8px] text-green-500 font-bold">LIVE</span>
+        </div>
+      </div>
     </div>
   );
 }
