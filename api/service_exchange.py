@@ -14,7 +14,7 @@ class handler(BaseHTTPRequestHandler):
             action = data.get('action', 'CAPTURE') # CAPTURE, SWAP, ou TRANSFER
             
             # PRIX DE RARETÉ SCELLÉ (Loi de l'Empire)
-            PRIX_UTIL = 3650.96
+            PRIX_UTIL = float(os.environ.get('UTIL_PRICE_ANCHOR', 3650.96))
 
             # 2. GÉNÉRATION DU WALLET SOUVERAIN (Zéro Friction)
             # L'ID client devient son coffre-fort mathématique

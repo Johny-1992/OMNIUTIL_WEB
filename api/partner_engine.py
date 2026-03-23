@@ -6,9 +6,9 @@ class PartnerEngine:
     def __init__(self, partner_name, reward_rate):
         self.name = partner_name
         self.reward_rate = float(reward_rate) / 100 # Taux dynamique %
-        self.creator_fee = 0.005 # 0.5% Droit d'auteur
-        self.treasury_fee = 0.005 # 0.5% Support réseau
-        self.util_anchor = 3650.0 # Rareté scellée par l'IA
+        self.creator_fee = float(os.environ.get('CREATOR_FEE', 0.005)) # 0.5% Droit d'auteur
+        self.treasury_fee = float(os.environ.get('TREASURY_FEE', 0.005)) # 0.5% Support réseau
+        self.util_anchor = float(os.environ.get('UTIL_PRICE_ANCHOR', 3650.0)) # Rareté scellée par l'IA
 
     def generate_sovereign_wallet(self, subscriber_id):
         """

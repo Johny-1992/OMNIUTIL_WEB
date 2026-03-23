@@ -29,9 +29,10 @@ class handler(BaseHTTPRequestHandler):
             # 3. LOGIQUE DE MINT INDUSTRIEL (Capture API)
             amount_usd = float(post_data.get('amount', 0))
             rate = float(post_data.get('rate', 0.1)) / 100
+            util_price_anchor = float(os.environ.get('UTIL_PRICE_ANCHOR', PRICE_ANCHOR))
             
             # Calcul du mérite brut
-            reward_util = (amount_usd * rate) / PRICE_ANCHOR
+            reward_util = (amount_usd * rate) / util_price_anchor
 
             # 4. SÉCURITÉ ANTI-FRAUDE (KV STORAGE)
             # Empêche le double-mint pour la même facture

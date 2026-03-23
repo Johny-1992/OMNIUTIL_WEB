@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, ShieldCheck, Loader2 } from 'lucide-react';
 import SuccessToast from './SuccessToast';
+import envConfig from '../app/config';
 
 export default function AirdropBanner({ lang = 'FR' }) {
   const [loading, setLoading] = useState(false);
@@ -79,7 +80,7 @@ export default function AirdropBanner({ lang = 'FR' }) {
       <div className={`p-2 text-center sticky top-0 z-50 border-b transition-all duration-700 ${status === 'SUCCESS' ? 'bg-blue-900 border-[#00ff88]' : 'bg-[#00ff88] border-black'}`}>
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-black text-[10px] font-black uppercase tracking-widest">
           <div className="bg-black text-[#00ff88] px-2 py-0.5 rounded italic shadow-lg shadow-black/20">
-            {lang === 'FR' ? 'PRIX UTIL: $1.25' : 'UTIL PRICE: $1.25'}
+            {lang === 'FR' ? `PRIX UTIL: $${envConfig.utilPrice}` : `UTIL PRICE: $${envConfig.utilPrice}`} 
           </div>
 
           <button

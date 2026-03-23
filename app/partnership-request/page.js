@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldAlert, CheckCircle, Cpu, Link, Globe, Database } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import envConfig from '../config';
 
 export default function PartnershipRequest() {
   const [formData, setFormData] = useState({ ecoName: "", api: "", rate: "", agreed: false });
@@ -76,6 +77,10 @@ export default function PartnershipRequest() {
           <div className="flex items-center p-5 bg-cyan-500/5 border border-cyan-500/20 rounded-2xl">
             <p className="text-[8px] opacity-60 uppercase italic leading-relaxed">Génération automatique des Wallets IDs via IA Coordinatrice iad1.</p>
           </div>
+        </div>
+
+        <div className="mb-6 text-[9px] text-cyan-300 border border-cyan-500/10 p-3 rounded-lg bg-black/20">
+          API route active: <code className="text-green-300">{envConfig.partnerApiPath}</code> · Base API: <code className="text-green-300">{envConfig.apiBaseUrl}</code>
         </div>
 
         <div className="flex items-start gap-4 mb-10 cursor-pointer" onClick={() => setFormData({...formData, agreed: !formData.agreed})}>

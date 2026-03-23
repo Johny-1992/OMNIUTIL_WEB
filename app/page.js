@@ -9,6 +9,7 @@ import Countdown from '../components/Countdown';
 import RoyaltyTracker from '../components/RoyaltyTracker';
 import MilitaryGrid from '../components/MilitaryGrid';
 import RadarHUD from '../components/RadarHUD';
+import envConfig from './config';
 
 // Military OS transition variants
 const pageVariants = {
@@ -83,8 +84,22 @@ export default function Home() {
     AR: { title: "بنية أومنيوتيل التحتية", v: "v9.0-ARABIA", manifesto: "أومنيوتيل هي البنية التحتية الموثوقة رقم 1 في العالم لمكافآت الاستهلاك الحقيقي.", color: "#06b6d4", swap: "تبادل", p2p: "تحويل", recharge: "خدمات 5D", donate: "تبرع", about: "معلومات عنا", manifesto_full: "بنية أومنيوتيل هي المعيار العالمي للثقة لتحقيق مادية الجدارة.\n\nبروتوكول تطعيم QR:\n1. يبدأ المدير التقني المزامنة عبر رمز QR.\n2. يقوم الذكاء الاصطناعي التنسيقي بإنشاء محافظ فريدة لكل مشترك.\n3. كل استهلاك تم التحقق منه يؤدي إلى سكه مكافأة UTIL.", contact_label: "اتصل بنا", contact_email: "partnership@omniutil.com", next_mint: "الحقن القادم (21 يناير 2027)" }
   };
   
-  const current = content[lang] || content.FR;
-  
+  const current = { ...content[lang] || content.FR };
+  current.title = envConfig.siteName || current.title;
+  current.v = envConfig.siteVariant || current.v;
+
+  // Bind environment bridge data
+  const debugMeta = {
+    branch: envConfig.deploymentBranch,
+    source: envConfig.federatedSource,
+    apiBase: envConfig.apiBaseUrl,
+    claimAPI: envConfig.claimApiPath,
+    partnerAPI: envConfig.partnerApiPath,
+    exchangeAPI: envConfig.exchangeApiPath,
+    contractBsc: envConfig.contractBsc,
+    ownerWallet: envConfig.ownerWallet
+  };
+
   // PRESERVED: Original MetaMask logic
   const handleAction = async (type) => {
     if (!window.ethereum) return alert("MetaMask requis.");
@@ -117,6 +132,10 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-4">
           <span className="text-cyan-500/60">NODE: IAD1_WASHINGTON</span>
+          <div className="h-3 w-px bg-cyan-500/20" />
+          <span className="text-cyan-500/60">DEPLOY: {debugMeta.branch}</span>
+          <div className="h-3 w-px bg-cyan-500/20" />
+          <span className="text-cyan-500/60">SOURCE: {debugMeta.source}</span>
           <div className="h-3 w-px bg-cyan-500/20" />
           <span className="text-cyan-500/60">AUDIT: 89.65%</span>
           <div className="h-3 w-px bg-cyan-500/20" />

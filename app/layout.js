@@ -13,22 +13,24 @@ const inter = Inter({
   display: 'swap',
 });
 
+import envConfig from './config';
+
 export const metadata = {
-  title: "OMNIUTIL | Infrastructure de Confiance n°1 | Military Grade",
-  description: "Système mondial de récompense sur consommation réelle basée sur la méritocratie. Infrastructure souveraine v9.0 - Node Washington IAD1.",
+  title: `${envConfig.siteName} | ${envConfig.siteVariant} | Military Grade`,
+  description: envConfig.siteDescription,
   keywords: ["OMNIUTIL", "crypto", "blockchain", "rewards", "infrastructure", "merit", "BSC"],
   authors: [{ name: "OMNIUTIL Infrastructure" }],
   openGraph: {
-    title: "OMNIUTIL | Infrastructure de Confiance n°1",
-    description: "Système mondial de récompense sur consommation réelle basée sur la méritocratie.",
-    url: "https://omniutil-web.vercel.app",
-    siteName: "OMNIUTIL",
+    title: `${envConfig.siteName} | ${envConfig.siteVariant}`,
+    description: envConfig.siteDescription,
+    url: envConfig.ogUrl,
+    siteName: envConfig.siteName,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "OMNIUTIL | Infrastructure de Confiance n°1",
-    description: "Système mondial de récompense sur consommation réelle.",
+    title: `${envConfig.siteName} | ${envConfig.siteVariant}`,
+    description: envConfig.siteDescription,
   },
 };
 
