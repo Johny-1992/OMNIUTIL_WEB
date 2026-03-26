@@ -10,7 +10,7 @@
   "dependencies": {
     "@react-three/drei": "latest",
     "@react-three/fiber": "latest",
-    "framer-motion": "^12.34.3",
+    "framer-motion": "^12.38.0",
     "gsap": "latest",
     "lucide-react": "^0.575.0",
     "motion-dom": "latest",
