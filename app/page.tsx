@@ -5,7 +5,7 @@ import { SovereignHUD } from '../components/SovereignHUD';
 
 const aboutContent = {
   fr: "OMNIUTIL est un protocole de souveraineté digitale conçu pour l'indépendance des actifs. Basé sur le Node Washington iad1, il assure une précision absolue et une valorisation constante de 3 650 $ / UTIL.",
-  en: "OMNIUTIL is a digital sovereignty protocol designed for asset independence. Based on the Washington iad1 Node, it ensures absolute precision and a constant valuation of ,650 / UTIL."
+  en: "OMNIUTIL is a digital sovereignty protocol designed for asset independence. Based on the Washington iad1 Node, it ensures absolute precision and a constant valuation of $3,650 / UTIL."
 };
 
 export default function Home() {
