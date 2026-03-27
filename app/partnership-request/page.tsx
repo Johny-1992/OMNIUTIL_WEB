@@ -1,15 +1,1 @@
-'use client';
-import { SovereignHUD } from '../../components/SovereignHUD';
-
-export default function PartnershipPage() {
-  return (
-    <SovereignHUD valuation="3 650 $ / UTIL" version="v9.0-PARTNER">
-      <div className="p-8 liquid-glass border border-[#06b6d433] max-w-xl mx-auto mt-20">
-        <h1 className="text-[#06b6d4] font-black tracking-tighter text-xl mb-4">PORTAIL PARTENAIRE IAD1</h1>
-        <p className="text-[10px] font-mono text-white/60">
-          En attente de signal de greffe... Connectez votre API de facturation via le QR Code principal.
-        </p>
-      </div>
-    </SovereignHUD>
-  );
-}
+'use client';import {SovereignHUD} from '../../components/SovereignHUD';export default function PartnershipPage(){const v="3 650 $ / UTIL",vr="v9.0-PARTNER";return(<SovereignHUD valuation={v} version={vr}><div className="flex flex-col items-center justify-center min-h-[50vh] px-4"><div className="p-8 liquid-glass border border-[#06b6d433] max-w-xl w-full text-center"><h1 className="text-[#06b6d4] font-black tracking-[0.3em] text-xl mb-6 uppercase">Portail Partenaire IAD1</h1><div className="space-y-4 text-[10px] font-mono text-white/70 leading-relaxed"><p className="border-l-2 border-[#06b6d4] pl-4 text-left italic">"En attente de signal de greffe... Connectez votre API de facturation via le QR Code principal."</p><div className="mt-8 pt-6 border-t border-white/10 opacity-50">STATUS: LISTENING_ON_PORT_443</div></div></div></div></SovereignHUD>);}
