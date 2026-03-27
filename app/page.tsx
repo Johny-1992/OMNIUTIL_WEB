@@ -1,84 +1,91 @@
 'use client';import {useState,useEffect} from 'react';import {motion} from 'framer-motion';import {SovereignHUD} from '../components/SovereignHUD';
 
-const VortexSchematic = ({ s }) => (
-  <svg viewBox="0 0 400 150" className="w-full max-w-lg mx-auto my-4 border border-[#06b6d405] p-2 bg-black/40 backdrop-blur-3xl rounded-full">
-    <circle cx="200" cy="75" r="70" className="stroke-white/5 fill-none" />
-    <motion.path d="M 50 75 Q 125 75, 175 40 Q 200 20, 225 40 Q 275 75, 350 75" stroke="#06b6d4" fill="none" strokeWidth="0.5" animate={{ pathLength: [0, 1], opacity: [0.1, 0.8, 0.1] }} transition={{ duration: 3, repeat: Infinity }} />
-    <motion.path d="M 50 75 Q 125 75, 175 110 Q 200 130, 225 110 Q 275 75, 350 75" stroke="#06b6d4" fill="none" strokeWidth="0.5" animate={{ pathLength: [0, 1], opacity: [0.1, 0.8, 0.1] }} transition={{ duration: 3, repeat: Infinity, delay: 1.5 }} />
-    <text x="50" y="75" className="fill-[#06b6d4] text-[6px] font-bold" textAnchor="middle">API</text>
-    <text x="350" y="75" className="fill-white text-[6px] font-bold" textAnchor="middle">USER</text>
-    <text x="200" y="75" className="fill-[#06b6d4] text-[9px] font-black" textAnchor="middle">NODE iad1</text>
+const AI_Core_Visual = () => (
+  <svg viewBox="0 0 100 100" className="w-64 h-64 mx-auto mb-10 invert brightness-200 opacity-90 group-hover:rotate-180 transition-transform duration-[3000ms]">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#06b6d4" strokeWidth="0.1" strokeDasharray="4 4" className="animate-spin-slow"/>
+    <path d="M30 50 L70 50 M50 30 L50 70" stroke="#06b6d4" strokeWidth="0.5" opacity="0.5"/>
+    <text x="50" y="52" textAnchor="middle" fontSize="3" className="fill-[#06b6d4] font-black tracking-[0.5em]">AI_COORDINATOR_GLOBAL</text>
   </svg>
 );
 
 export default function Home() {
-  const [st, setSt] = useState(0);
-  const [tm, setTm] = useState({d:0,h:0,m:0,s:0});
+  const [lang, setLang] = useState('FR');
   const bsc = "0xC8A3EA13b51C5e0a8e5c979d6A0b4BDa6bb1e76B";
 
-  useEffect(() => {
-    const target = new Date("2027-01-21T00:00:00").getTime();
-    const i = setInterval(() => {
-      const now = new Date().getTime(), d = target - now;
-      setTm({
-        d: Math.floor(d/(1e3*60*60*24)),
-        h: Math.floor((d%(1e3*60*60*24))/(1e3*60*60)),
-        m: Math.floor((d%(1e3*60))/(1e3*60)),
-        s: Math.floor((d%(1e3*60))/1e3)
-      });
-    }, 1000);
-    return () => clearInterval(i);
-  }, []);
+  const content = {
+    FR: {
+      hero: "LOGIQUE MÈRE OMNIUTIL",
+      steps: ["GREFFE CTO (API/TAUX)", "MAPPING ID (WALLETS)", "CAPTURE FLUX (MÉRITE)"],
+      tax: "TAXE DE SOUVERAINETÉ (0.5% + 0.5%)",
+      cta: "INITIALISER LA GREFFE"
+    },
+    EN: {
+      hero: "OMNIUTIL MOTHER LOGIC",
+      steps: ["CTO GRAFTING (API/RATE)", "ID MAPPING (WALLETS)", "FLOW CAPTURE (MERIT)"],
+      tax: "SOVEREIGNTY TAX (0.5% + 0.5%)",
+      cta: "INITIALIZE GRAFTING"
+    },
+    ZH: {
+      hero: "OMNIUTIL 母体逻辑",
+      steps: ["CTO 植入 (API/费率)", "ID 映射 (钱包)", "流量捕捉 (价值)"],
+      tax: "主权税收 (0.5% + 0.5%)",
+      cta: "初始化植入"
+    },
+    AR: {
+      hero: "منطق أومني-أوتيل الأم",
+      steps: ["تطعيم CTO (API/المعدل)", "خرائط المعرف (المحافظ)", "التقاط التدفق (الاستحقاق)"],
+      tax: "ضريبة السيادة (0.5% + 0.5%)",
+      cta: "بدء التطعيم"
+    }
+  };
+
+  const c = content[lang] || content.FR;
 
   return (
-    <SovereignHUD valuation="3 650 $ / UTIL" version="v2040-SOUVERAIN">
-      <div className="relative min-h-screen bg-[#000000] text-white font-mono uppercase overflow-hidden">
+    <SovereignHUD valuation="3 650 $ / UTIL" version="v2040-GLOBAL">
+      <div className={`min-h-screen bg-black text-white font-mono uppercase ${lang === 'AR' ? 'text-right' : 'text-left'}`}>
         
-        {/* NAV MULTILINGUE AVEC HAUTEUR FIGÉE (FIX CLS) */}
-        <nav className="relative z-50 flex justify-between items-center h-24 px-6 border-b border-white/5 backdrop-blur-3xl">
-          <div className="flex flex-col min-w-[150px]"><span className="text-[#06b6d4] font-black tracking-widest text-[10px]">OMNIUTIL_INFRA</span><span className="text-[6px] opacity-30 italic">Washington iad1 Verified</span></div>
-          <div className="hidden md:flex gap-6 text-[8px] font-bold tracking-widest text-white/40">
-            <span>HOME</span><span>SWAP</span><span>ABOUT</span><span>DONATE</span>
+        <header className="h-24 px-10 flex justify-between items-center border-b border-white/5 backdrop-blur-3xl sticky top-0 z-50 bg-black/80">
+          <div className="flex items-center gap-4 border-l-2 border-[#06b6d4] pl-5">
+            <span className="text-white font-black text-xl italic tracking-tighter">OMNIUTIL</span>
           </div>
-          <div className="flex gap-3 text-[7px] text-[#06b6d4] font-bold min-w-[100px] justify-end">
-            <span className="cursor-pointer hover:text-white">FR</span><span className="cursor-pointer hover:text-white">EN</span><span className="cursor-pointer hover:text-white">ZH</span><span className="cursor-pointer hover:text-white">AR</span>
+          <div className="flex gap-4 text-[9px] font-black">
+            {['FR','EN','ZH','AR'].map(l => (
+              <button key={l} onClick={()=>setLang(l)} className={`px-2 py-1 ${lang===l?'text-[#06b6d4] border border-[#06b6d4]':'text-white/20'}`}>{l}</button>
+            ))}
           </div>
-        </nav>
+        </header>
 
-        <main className="relative z-10 max-w-6xl mx-auto px-6 py-12 flex flex-col items-center">
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-              <h2 className="text-[#06b6d4] text-xs font-black border-l-4 border-[#06b6d4] pl-4">PROTOCOLE DE GREFFE (v9.0)</h2>
-              <div className="text-[9px] space-y-2 text-white/50 bg-white/[0.02] p-6 rounded-3xl border border-white/5">
-                <p>1. SCAN CTO : ACCÈS TERMINAL ANTI-FRAUDE</p>
-                <p>2. CONFIG MÉRITE : PARAMÉTRAGE TAUX PARTENAIRE</p>
-                <p>3. CAPTURE API : LIAISON FLUX NODE IAD1</p>
-                <p>4. WALLET ID : GÉNÉRATION (+243...)</p>
-                <p>5. DISTRIBUTION : CONSOMMATION RÉELLE</p>
+        <main className="max-w-7xl mx-auto p-10 pt-24">
+          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-20 items-center ${lang === 'AR' ? 'direction-rtl' : ''}`}>
+            
+            <section className="space-y-12">
+              <h1 className="text-4xl font-black italic tracking-tighter text-[#06b6d4] leading-none">{c.hero}</h1>
+              <div className="space-y-6 border-l border-white/10 pl-10">
+                {c.steps.map((s, i) => (
+                  <div key={i} className="group">
+                    <span className="text-[#06b6d4] text-xs font-black block">0{i+1}_{s}</span>
+                    <p className="text-[9px] text-white/40 italic">Global Infrastructure Verified</p>
+                  </div>
+                ))}
               </div>
-              <div className="pt-4 border-t border-white/5">
-                <p className="text-[7px] text-white/20 mb-2 tracking-[0.3em]">PROCHAINE INJECTION (2027)</p>
-                <div className="flex gap-4 text-3xl font-black italic">
-                  <span>{tm.d}D</span><span>{tm.h}H</span><span>{tm.m}M</span>
-                </div>
+              <div className="p-8 bg-[#06b6d405] border border-[#06b6d422] rounded-[40px]">
+                <h3 className="text-[10px] font-black mb-4 tracking-[0.4em] text-[#06b6d4]">{c.tax}</h3>
+                <div className="flex justify-between text-[9px] opacity-60"><span>OWNER/INFRA: 0.5%</span><span>TREASURY: 0.5%</span></div>
               </div>
-            </motion.div>
+            </section>
 
-            <motion.div whileHover={{ scale: 1.05, y: -15 }} onClick={() => setSt(1)} className="group relative p-10 bg-white/[0.01] border border-white/10 rounded-[60px] cursor-pointer shadow-[0_0_100px_-20px_rgba(6,182,212,0.1)]">
-              <div className="absolute inset-0 group-hover:bg-[#06b6d405] transition-colors rounded-[60px]" />
-              <img src="/qr-code.png" className="w-56 h-56 grayscale invert brightness-200 mx-auto mb-4 group-hover:brightness-100 group-hover:invert-0 transition-all duration-1000" />
-              <p className="text-center text-[8px] tracking-[0.5em] text-[#06b6d4] animate-pulse">SCAN TO GRAFT DATABASE</p>
-            </motion.div>
+            <div className="text-center bg-white/[0.01] p-16 rounded-[80px] border border-white/5 relative group">
+              <AI_Core_Visual />
+              <button className="bg-[#06b6d4] text-black px-12 py-4 text-[10px] font-black hover:bg-white transition-all rounded-full">{c.cta}</button>
+            </div>
           </div>
-
-          <VortexSchematic s={st} />
-
-          <footer className="mt-20 w-full pt-8 border-t border-white/5 grid grid-cols-1 md:grid-cols-3 gap-8 text-[7px] text-white/20 tracking-[0.2em] items-center">
-            <div className="text-left font-bold italic">BSC: {bsc}</div>
-            <div className="text-center"><a href="mailto:johnymulenda5@gmail.com" className="text-white border border-white/10 px-6 py-2 hover:bg-white hover:text-black transition-all font-black">partnership@omniutil.com</a></div>
-            <div className="text-right italic uppercase">© 2040 OMNIUTIL EMPIRE - iad1 VERIFIED</div>
-          </footer>
         </main>
+
+        <footer className="mt-24 p-10 border-t border-white/5 flex justify-between text-[7px] text-white/20 tracking-[0.5em]">
+          <span>BSC: {bsc}</span>
+          <span>© 2040 OMNIUTIL EMPIRE</span>
+        </footer>
       </div>
     </SovereignHUD>
   );
