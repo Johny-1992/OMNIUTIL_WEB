@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const SovereignQR = () => (
   <div className="relative p-4 bg-white/5 border border-[#06b6d433] rounded-3xl backdrop-blur-xl group cursor-pointer shadow-[0_0_50px_-12px_rgba(6,182,212,0.3)]">
@@ -15,6 +15,7 @@ const SovereignQR = () => (
 
 export default function Home() {
   const [lang, setLang] = useState('FR');
+  const [showModal, setShowModal] = useState(false);
   const bsc = "0xC8A3EA13b51C5e0a8e5c979d6A0b4BDa6bb1e76B";
 
   const translations = {
@@ -24,7 +25,14 @@ export default function Home() {
       steps: ["GREFFE ÉCOSYSTÈME (API/TAUX)", "MAPPING ID (WALLETS AI)", "CAPTURE FLUX (MÉRITE)"],
       tax: "TAXE DE SOUVERAINETÉ SYSTÉMIQUE",
       cta: "INITIALISER LA GREFFE",
-      about: "À PROPOS", donate: "DON OWNER", contact: "NOUS ÉCRIRE"
+      about: "À PROPOS", donate: "DON OWNER", contact: "NOUS ÉCRIRE",
+      modalTitle: "CONSTITUTION TECHNIQUE",
+      modalText: [
+        "1. SOUVERAINETÉ : L'IA Coordonnatrice est l'unique autorité de gestion des flux UTIL.",
+        "2. MÉRITE AUTOMATISÉ : Chaque acte de consommation déclenche une récompense instantanée.",
+        "3. L'ÉQUILIBRE (0.5% + 0.5%) : Prélèvement automatique sur chaque mouvement pour l'Infrastructure et la Trésorerie.",
+        "4. FONGIBILITÉ : L'UTIL est convertible en USDT ou en services partenaires."
+      ]
     },
     EN: {
       hero: "OMNIUTIL MOTHER LOGIC",
@@ -32,7 +40,14 @@ export default function Home() {
       steps: ["ECOSYSTEM GRAFTING", "ID MAPPING", "FLOW CAPTURE"],
       tax: "SYSTEMIC SOVEREIGNTY TAX",
       cta: "INITIALIZE GRAFTING",
-      about: "ABOUT", donate: "DONATE OWNER", contact: "CONTACT US"
+      about: "ABOUT", donate: "DONATE OWNER", contact: "CONTACT US",
+      modalTitle: "TECHNICAL CONSTITUTION",
+      modalText: [
+        "1. SOVEREIGNTY: The AI Coordinator is the sole authority for UTIL flow management.",
+        "2. AUTOMATED MERIT: Every consumption act triggers an instant reward.",
+        "3. THE BALANCE (0.5% + 0.5%): Automatic levy on every movement for Infra and Treasury.",
+        "4. FUNGIBILITY: UTIL is convertible to USDT or partner services."
+      ]
     },
     ZH: {
       hero: "OMNIUTIL 母体逻辑",
@@ -40,7 +55,14 @@ export default function Home() {
       steps: ["生态系统植入 (API/费率)", "ID 映射 (AI 钱包)", "流量捕捉 (价值)"],
       tax: "系统主权税收",
       cta: "初始化植入",
-      about: "关于", donate: "所有者捐赠", contact: "联系我们"
+      about: "关于", donate: "所有者捐赠", contact: "联系我们",
+      modalTitle: "技术章程",
+      modalText: [
+        "1. 主权：AI 协调员是 UTIL 流量管理的唯一机构。",
+        "2. 自动功绩：每项消费行为都会触发即时奖励。",
+        "3. 平衡 (0.5% + 0.5%)：每次变动都会自动征收基础设施和财政费用。",
+        "4. 可互换性：UTIL 可转换为 USDT 或合作伙伴服务。"
+      ]
     },
     AR: {
       hero: "منطق أومني-أوتيل الأم",
@@ -48,7 +70,14 @@ export default function Home() {
       steps: ["تطعيم النظام (API/المعدل)", "خرائط المعرف (محافظ AI)", "التقاط التدفق (الاستحقاق)"],
       tax: "ضريبة السيادة النظامية",
       cta: "بدء التطعيم",
-      about: "حول", donate: "تبرع للمالك", contact: "اتصل بنا"
+      about: "حول", donate: "تبرع للمالك", contact: "اتصل بنا",
+      modalTitle: "الدستور الفني",
+      modalText: [
+        "1. السيادة: المنسق الاصطناعي هو السلطة الوحيدة لإدارة تدفق UTIL.",
+        "2. الاستحقاق الآلي: كل فعل استهلاك يؤدي إلى مكافأة فورية.",
+        "3. التوازن (0.5٪ + 0.5٪): ضريبة تلقائية على كل حركة للبنية التحتية والخزانة.",
+        "4. القابلية للاستبدال: UTIL قابلة للتحويل إلى USDT أو خدمات الشركاء."
+      ]
     }
   };
 
@@ -56,7 +85,31 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen bg-[#020202] text-white font-mono uppercase overflow-x-hidden selection:bg-[#06b6d4] ${lang === 'AR' ? 'text-right' : 'text-left'}`}>
-      
+
+      {/* MODALE CONSTITUTION */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/95 backdrop-blur-3xl"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+              className="max-w-2xl w-full bg-white/[0.03] border border-[#06b6d433] rounded-[40px] p-10 lg:p-16 relative shadow-[0_0_100px_-20px_rgba(6,182,212,0.2)]"
+            >
+              <button onClick={() => setShowModal(false)} className="absolute top-8 right-8 text-[#06b6d4] font-black hover:scale-110 transition-transform">CLOSE [X]</button>
+              <h2 className="text-2xl font-black text-[#06b6d4] mb-12 italic tracking-tighter">{t.modalTitle}</h2>
+              <div className="space-y-8">
+                {t.modalText.map((line, idx) => (
+                  <p key={idx} className="text-[10px] leading-relaxed text-white/70 tracking-widest italic">{line}</p>
+                ))}
+              </div>
+              <div className="mt-12 pt-8 border-t border-white/5 text-[8px] text-white/20 tracking-[0.5em]">OMNIUTIL_PROTOCOL_V2040_SECURED</div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <header className="h-24 px-8 flex justify-between items-center border-b border-white/5 backdrop-blur-2xl sticky top-0 z-50 bg-black/40">
         <div className="flex items-center gap-4">
           <div className="w-1 h-8 bg-[#06b6d4] shadow-[0_0_15px_#06b6d4]" />
@@ -67,7 +120,7 @@ export default function Home() {
         </div>
 
         <nav className="hidden lg:flex gap-8 text-[9px] font-black text-white/40">
-          <a href="#about" className="hover:text-white transition-all">{t.about}</a>
+          <button onClick={() => setShowModal(true)} className="hover:text-white transition-all underline decoration-[#06b6d400] hover:decoration-[#06b6d4] underline-offset-4 uppercase">{t.about}</button>
           <a href={`https://bscscan.com/address/${bsc}`} target="_blank" className="hover:text-white transition-all">{t.donate}</a>
           <a href="mailto:partnership@omniutil.com" className="hover:text-white transition-all">{t.contact}</a>
         </nav>
@@ -81,7 +134,7 @@ export default function Home() {
 
       <main className="max-w-7xl mx-auto px-8 py-20">
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-24 items-center ${lang === 'AR' ? 'direction-rtl' : ''}`}>
-          
+
           <section className="space-y-12">
             <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}>
               <h1 className="text-5xl lg:text-7xl font-black italic tracking-tighter leading-none mb-6">
@@ -92,7 +145,7 @@ export default function Home() {
 
             <div className="space-y-8 border-l-2 border-[#06b6d433] pl-10">
               {t.steps.map((s, i) => (
-                <div key={i} className="group">
+                <div key={i} className="group cursor-help">
                   <span className="text-[#06b6d4] text-xs font-black block mb-1">0{i+1}_{s}</span>
                   <div className="h-[1px] w-0 group-hover:w-full bg-[#06b6d433] transition-all duration-700" />
                 </div>
@@ -110,8 +163,10 @@ export default function Home() {
 
           <div className="flex flex-col items-center justify-center space-y-10">
              <SovereignQR />
-             <motion.button 
-               whileHover={{ scale: 1.05 }} 
+             <motion.button
+               whileHover={{ scale: 1.05 }}
+               whileTap={{ scale: 0.98 }}
+               onClick={() => setShowModal(true)}
                className="w-full max-w-sm bg-[#06b6d4] text-black font-black py-5 rounded-full text-xs tracking-[0.3em] shadow-[0_0_30px_rgba(6,182,212,0.4)]"
              >
                {t.cta}
@@ -124,6 +179,10 @@ export default function Home() {
         <div className="flex flex-col gap-2 text-left">
           <span>CONTRACT_SOUVERAIN: {bsc}</span>
           <span>INTEGRITY_CHECK: PASSED_V3.0</span>
+        </div>
+        <div className="flex gap-8">
+           <button onClick={() => setShowModal(true)} className="hover:text-white transition-all uppercase">WHITEPAPER</button>
+           <a href="mailto:partnership@omniutil.com" className="hover:text-white transition-all uppercase">SUPPORT</a>
         </div>
         <span>© 2040 OMNIUTIL EMPIRE</span>
       </footer>
