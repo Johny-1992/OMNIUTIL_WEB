@@ -1,0 +1,389 @@
+/* 🧠 AI-POWERED HYPER-INTELLIGENT COLOR SYSTEM */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=IBM+Plex+Sans:wght@300;400;700&display=swap');
+
+:root {
+  /* 🤖 NEURAL NETWORK COLORS */
+  --ai-neural-1: #ff00ff;
+  --ai-neural-2: #00ffff;
+  --ai-neural-3: #ffff00;
+  --ai-neural-4: #ff00aa;
+  --ai-neural-5: #00ff88;
+  
+  /* 🧬 QUANTUM DNA HELIX */
+  --dna-strand-1: #0099ff;
+  --dna-strand-2: #ff0099;
+  --dna-strand-3: #00ff99;
+  
+  /* ⚛️ ATOMIC NUCLEUS */
+  --nucleus-core: #ffaa00;
+  --nucleus-electron: #00aaff;
+  --nucleus-proton: #aa00ff;
+  
+  /* 🔮 CONSCIOUSNESS FIELD */
+  --consciousness-active: #ff1493;
+  --consciousness-idle: #4169e1;
+  --consciousness-sync: #00fa9a;
+  --consciousness-quantum: #9d4edd;
+  
+  /* 🌌 DIMENSIONAL LAYERS */
+  --dimension-1: #00d4ff;
+  --dimension-2: #7c3aed;
+  --dimension-3: #d946ef;
+  --dimension-4: #00ff88;
+  --dimension-5: #ff006e;
+  
+  /* 💎 EXOTIC MATTER */
+  --exotic-light: #ffffff;
+  --exotic-dark: #010101;
+  --exotic-antimatter: #ff00ff;
+  --exotic-darkmatter: #000033;
+  
+  /* 🎆 SUPER NOVA SPECTRUM */
+  --supernova-blue: #0080ff;
+  --supernova-cyan: #00ffff;
+  --supernova-magenta: #ff0080;
+  --supernova-red: #ff0000;
+  --supernova-yellow: #ffff00;
+  
+  --font-ai: 'JetBrains Mono', monospace;
+  --font-human: 'IBM Plex Sans', sans-serif;
+}
+
+/* 🌌 INTELLIGENT BACKGROUND - Adapts to user interaction */
+body {
+  background: linear-gradient(
+    135deg,
+    #000033 0%,
+    #001a66 25%,
+    #0d0033 50%,
+    #001a66 75%,
+    #000033 100%
+  );
+  background-size: 400% 400%;
+  animation: ai-aware-background 15s ease infinite;
+  color: var(--dimension-1);
+  font-family: var(--font-ai);
+  position: relative;
+  overflow-x: hidden;
+}
+
+@keyframes ai-aware-background {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 0%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🧠 NEURAL PATHWAYS - Living AI visualization */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 0, 255, 0.1) 0%, transparent 30%),
+              radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.1) 0%, transparent 30%),
+              radial-gradient(circle at 50% 50%, rgba(255, 255, 0, 0.05) 0%, transparent 40%);
+  animation: ai-neural-pulse 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes ai-neural-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* 🤖 HYPER-INTELLIGENT TITLES */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-ai);
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, 
+    var(--dimension-1) 0%,
+    var(--dimension-2) 25%,
+    var(--dimension-3) 50%,
+    var(--dimension-4) 75%,
+    var(--dimension-1) 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: ai-intelligent-gradient 4s ease infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)) drop-shadow(0 0 40px rgba(217, 70, 239, 0.4));
+  position: relative;
+}
+
+@keyframes ai-intelligent-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🔮 CONSCIOUSNESS-AWARE CONTAINERS */
+.ai-container {
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 51, 0.8) 0%,
+    rgba(13, 0, 51, 0.8) 50%,
+    rgba(0, 0, 51, 0.8) 100%);
+  border: 3px solid;
+  border-image: linear-gradient(135deg, 
+    var(--consciousness-active) 0%,
+    var(--consciousness-quantum) 50%,
+    var(--consciousness-sync) 100%) 1;
+  backdrop-filter: blur(30px);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 
+    0 0 30px rgba(255, 0, 255, 0.3),
+    inset 0 0 30px rgba(0, 255, 255, 0.1),
+    0 0 60px rgba(157, 78, 221, 0.2);
+  animation: ai-consciousness-aware 4s ease-in-out infinite;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes ai-consciousness-aware {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(255, 0, 255, 0.3),
+      inset 0 0 30px rgba(0, 255, 255, 0.1),
+      0 0 60px rgba(157, 78, 221, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(255, 0, 255, 0.5),
+      inset 0 0 40px rgba(0, 255, 255, 0.2),
+      0 0 80px rgba(157, 78, 221, 0.4);
+  }
+}
+
+.ai-container:hover {
+  border-image: linear-gradient(135deg, 
+    var(--supernova-magenta) 0%,
+    var(--supernova-cyan) 50%,
+    var(--supernova-yellow) 100%) 1;
+  box-shadow: 
+    0 0 60px rgba(255, 0, 255, 0.6),
+    inset 0 0 50px rgba(0, 255, 255, 0.3),
+    0 0 100px rgba(157, 78, 221, 0.5);
+  transform: translateY(-5px);
+}
+
+/* ⚡ HYPER-INTELLIGENT BUTTONS */
+.ai-button {
+  position: relative;
+  background: linear-gradient(135deg, 
+    var(--consciousness-active) 0%,
+    var(--consciousness-quantum) 50%,
+    var(--consciousness-sync) 100%);
+  background-size: 300% 300%;
+  border: 3px solid var(--dimension-1);
+  color: var(--exotic-dark);
+  font-family: var(--font-ai);
+  font-weight: 800;
+  letter-spacing: 2px;
+  padding: 15px 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 0 30px rgba(255, 0, 255, 0.5),
+    0 0 60px rgba(0, 255, 255, 0.3);
+  overflow: hidden;
+  text-transform: uppercase;
+  animation: ai-button-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ai-button-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(255, 0, 255, 0.5),
+      0 0 60px rgba(0, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(255, 0, 255, 0.8),
+      0 0 80px rgba(0, 255, 255, 0.5);
+  }
+}
+
+.ai-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: ai-button-shine 3s infinite;
+}
+
+@keyframes ai-button-shine {
+  0% { transform: translate(-100%, -100%) rotate(45deg); }
+  100% { transform: translate(100%, 100%) rotate(45deg); }
+}
+
+.ai-button:hover {
+  transform: translateY(-5px) scale(1.05);
+  background-position: 100% 50%;
+  box-shadow: 
+    0 10px 40px rgba(255, 0, 255, 0.8),
+    0 0 80px rgba(0, 255, 255, 0.6);
+  filter: brightness(1.2);
+}
+
+.ai-button:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* 🧬 QUANTUM INPUTS */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 51, 0.9) 0%,
+    rgba(13, 0, 51, 0.9) 100%);
+  border: 2px solid var(--dimension-1);
+  color: var(--dimension-4);
+  font-family: var(--font-ai);
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 255, 136, 0.1),
+    0 0 10px rgba(0, 212, 255, 0.2);
+  font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--consciousness-active);
+  box-shadow: 
+    inset 0 0 20px rgba(0, 255, 136, 0.2),
+    0 0 30px rgba(255, 0, 255, 0.4),
+    0 0 60px rgba(0, 255, 255, 0.3);
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 80, 0.95) 0%,
+    rgba(20, 0, 80, 0.95) 100%);
+  transform: scale(1.02);
+}
+
+input::placeholder {
+  color: rgba(0, 212, 255, 0.5);
+}
+
+/* 🌊 INTELLIGENT LINKS */
+a {
+  color: var(--dimension-1);
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--consciousness-active), var(--consciousness-sync));
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+a:hover {
+  color: var(--consciousness-active);
+  text-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* 🔥 SUPER NOVA TEXT EFFECT */
+.supernova-text {
+  animation: supernova-burst 3s ease-in-out infinite;
+}
+
+@keyframes supernova-burst {
+  0%, 100% {
+    color: var(--dimension-1);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  }
+  25% {
+    color: var(--consciousness-active);
+    text-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+  }
+  50% {
+    color: var(--dimension-3);
+    text-shadow: 0 0 30px rgba(217, 70, 239, 0.8);
+  }
+  75% {
+    color: var(--consciousness-sync);
+    text-shadow: 0 0 20px rgba(0, 255, 154, 0.8);
+  }
+}
+
+/* 💫 HYPER-INTELLIGENT GLOW */
+.hyper-glow {
+  animation: hyper-intelligent-glow 2s ease-in-out infinite;
+}
+
+@keyframes hyper-intelligent-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(0, 212, 255, 0.5),
+      0 0 40px rgba(124, 58, 237, 0.3),
+      inset 0 0 20px rgba(0, 212, 255, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(255, 0, 255, 0.7),
+      0 0 80px rgba(0, 255, 255, 0.5),
+      inset 0 0 30px rgba(217, 70, 239, 0.2);
+  }
+}
+
+/* 🎆 RESPONSIVE & PERFORMANCE */
+@media (max-width: 768px) {
+  h1, h2, h3 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+  
+  .ai-button {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+  
+  .ai-container {
+    padding: 15px;
+  }
+}
+
+/* 🔋 REDUCE MOTION FOR ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

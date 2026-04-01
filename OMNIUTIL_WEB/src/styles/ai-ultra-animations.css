@@ -1,0 +1,237 @@
+/* 🤖 ULTRA-INTELLIGENT MACHINE LEARNING ANIMATIONS */
+
+/* 🧠 NEURAL NETWORK PULSE */
+@keyframes neural-network-sync {
+  0% {
+    filter: brightness(1) hue-rotate(0deg);
+    transform: scale(1);
+  }
+  25% {
+    filter: brightness(1.2) hue-rotate(45deg);
+    transform: scale(1.05);
+  }
+  50% {
+    filter: brightness(1.5) hue-rotate(90deg);
+    transform: scale(1.1);
+  }
+  75% {
+    filter: brightness(1.2) hue-rotate(135deg);
+    transform: scale(1.05);
+  }
+  100% {
+    filter: brightness(1) hue-rotate(180deg);
+    transform: scale(1);
+  }
+}
+
+/* 🎯 QUANTUM ENTANGLEMENT DANCE */
+@keyframes quantum-entanglement {
+  0% {
+    transform: translate(0, 0) rotateZ(0deg);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translate(10px, -10px) rotateZ(90deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-10px, 10px) rotateZ(180deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translate(10px, 10px) rotateZ(270deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotateZ(360deg);
+    opacity: 0.8;
+  }
+}
+
+/* 🔮 CONSCIOUSNESS AWAKENING */
+@keyframes consciousness-awakening {
+  0% {
+    filter: blur(10px) brightness(0.5);
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    filter: blur(7px) brightness(0.7);
+    transform: scale(0.7);
+    opacity: 0.3;
+  }
+  50% {
+    filter: blur(0px) brightness(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  75% {
+    filter: blur(2px) brightness(1.1);
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(0px) brightness(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ⚡ AI LEARNING CURVE */
+@keyframes ai-learning-curve {
+  0% {
+    clip-path: polygon(0 100%, 0 100%, 0 100%, 0 100%);
+  }
+  25% {
+    clip-path: polygon(0 75%, 25% 75%, 25% 25%, 0 100%);
+  }
+  50% {
+    clip-path: polygon(0 50%, 50% 50%, 50% 0%, 0 100%);
+  }
+  75% {
+    clip-path: polygon(0 25%, 75% 25%, 100% 0%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(0 0%, 100% 0%, 100% 100%, 0 100%);
+  }
+}
+
+/* 🌌 DIMENSIONAL RIFTS */
+@keyframes dimensional-rift {
+  0% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  25% {
+    transform: perspective(1000px) rotateX(45deg) rotateY(45deg) rotateZ(45deg);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(90deg) rotateY(90deg) rotateZ(90deg);
+  }
+  75% {
+    transform: perspective(1000px) rotateX(45deg) rotateY(45deg) rotateZ(45deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+}
+
+/* 💎 EXOTIC MATTER OSCILLATION */
+@keyframes exotic-oscillation {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: saturate(1);
+  }
+  25% {
+    background-position: 50% 0%;
+    filter: saturate(1.3);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: saturate(1.5);
+  }
+  75% {
+    background-position: 50% 100%;
+    filter: saturate(1.3);
+  }
+}
+
+/* 🌀 QUANTUM VORTEX */
+@keyframes quantum-vortex {
+  0% {
+    transform: rotate(0deg) scale(1);
+    border-radius: 50%;
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    border-radius: 40%;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+    border-radius: 30%;
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
+    border-radius: 40%;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    border-radius: 50%;
+  }
+}
+
+/* 🔥 THERMONUCLEAR CHAIN REACTION */
+@keyframes thermonuclear-reaction {
+  0% {
+    filter: brightness(0.5);
+    transform: scale(0.8);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  }
+  25% {
+    filter: brightness(0.8);
+    transform: scale(0.9);
+    box-shadow: 0 0 30px rgba(255, 100, 0, 0.6);
+  }
+  50% {
+    filter: brightness(1.5);
+    transform: scale(1.1);
+    box-shadow: 0 0 60px rgba(255, 200, 0, 1);
+  }
+  75% {
+    filter: brightness(1.2);
+    transform: scale(0.95);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+  }
+  100% {
+    filter: brightness(0.5);
+    transform: scale(0.8);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+  }
+}
+
+/* 🎆 CASCADING QUANTUM COLLAPSE */
+@keyframes quantum-collapse {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-20px) scaleY(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-40px) scaleY(0.8);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-20px) scaleY(0.9);
+    opacity: 0.8;
+  }
+}
+
+/* ✨ CONSCIOUSNESS SYNC WAVE */
+@keyframes consciousness-sync {
+  0% {
+    background-position: -200% center;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 200% center;
+    filter: hue-rotate(180deg);
+  }
+  100% {
+    background-position: -200% center;
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Classes d'animation */
+.animate-neural-sync { animation: neural-network-sync 4s ease-in-out infinite; }
+.animate-quantum-entangle { animation: quantum-entanglement 5s ease-in-out infinite; }
+.animate-consciousness-awake { animation: consciousness-awakening 6s ease-in-out infinite; }
+.animate-ai-learning { animation: ai-learning-curve 4s ease-in-out infinite; }
+.animate-dimensional-rift { animation: dimensional-rift 5s ease-in-out infinite; }
+.animate-exotic-oscillate { animation: exotic-oscillation 6s ease-in-out infinite; }
+.animate-quantum-vortex { animation: quantum-vortex 4s linear infinite; }
+.animate-thermonuclear { animation: thermonuclear-reaction 5s ease-in-out infinite; }
+.animate-quantum-collapse { animation: quantum-collapse 3s ease-in-out infinite; }
+.animate-consciousness-sync { animation: consciousness-sync 4s linear infinite; background-size: 300% 300%; }

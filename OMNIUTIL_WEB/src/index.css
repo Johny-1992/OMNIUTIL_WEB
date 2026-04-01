@@ -1,0 +1,545 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=IBM+Plex+Sans:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap');
+
+:root {
+  --ai-neural-1: #ff00ff;
+  --ai-neural-2: #00ffff;
+  --consciousness-active: #ff1493;
+  --consciousness-sync: #00fa9a;
+  --dimension-1: #00d4ff;
+  --dimension-3: #d946ef;
+  --dimension-4: #00ff88;
+  --exotic-dark: #010101;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #000033 0%, #001a66 25%, #0d0033 50%, #001a66 75%, #000033 100%);
+  background-size: 400% 400%;
+  animation: ai-aware-background 20s ease infinite;
+  color: var(--dimension-1);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+@keyframes ai-aware-background {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 0, 255, 0.1) 0%, transparent 30%), 
+              radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.1) 0%, transparent 30%);
+  animation: ai-neural-pulse 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes ai-neural-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* ✅ TITRES - STABLE avec gradient animé (pas le texte qui bouge) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #00d4ff, #7c3aed, #d946ef, #00d4ff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: ai-intelligent-gradient 6s ease infinite;
+  filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.5));
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes ai-intelligent-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ✅ PARAGRAPHES - TEXTE COMPLÈTEMENT STABLE */
+p, span, label { 
+  color: var(--dimension-1); 
+  position: relative; 
+  z-index: 2;
+  font-weight: 500;
+  animation: none !important;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+
+/* ✅ TITRES TEXTE - STABLE AVEC GLOW SUBTIL */
+.supernova-text {
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.6) !important;
+  animation: none !important;
+}
+
+.hyper-glow {
+  color: var(--dimension-1) !important;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.5),
+               0 0 30px rgba(255, 0, 255, 0.3) !important;
+  animation: none !important;
+}
+
+.subtitle-glow {
+  font-size: 1.2rem;
+  color: var(--dimension-4) !important;
+  text-shadow: 0 0 18px rgba(0, 255, 136, 0.6) !important;
+  animation: none !important;
+}
+
+/* ✅ CONTAINERS - Animations SUBTILES et FLUIDES */
+.ai-container {
+  background: linear-gradient(135deg, rgba(0, 0, 51, 0.8), rgba(13, 0, 51, 0.8));
+  backdrop-filter: blur(30px);
+  border: 2px solid var(--consciousness-active);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.3), inset 0 0 30px rgba(0, 255, 255, 0.1);
+  animation: ai-consciousness-aware 8s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes ai-consciousness-aware {
+  0%, 100% { box-shadow: 0 0 30px rgba(255, 0, 255, 0.3), inset 0 0 30px rgba(0, 255, 255, 0.1); }
+  50% { box-shadow: 0 0 50px rgba(255, 0, 255, 0.5), inset 0 0 40px rgba(0, 255, 255, 0.2); }
+}
+
+.ai-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 60px rgba(255, 0, 255, 0.6), inset 0 0 50px rgba(0, 255, 255, 0.3);
+}
+
+/* ✅ BUTTONS - Réactivité RAPIDE et FLUIDE */
+.ai-button {
+  position: relative;
+  background: linear-gradient(135deg, var(--consciousness-active), var(--consciousness-sync));
+  background-size: 300% 300%;
+  border: 3px solid var(--dimension-1);
+  color: var(--exotic-dark);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  letter-spacing: 2px;
+  padding: 15px 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+  overflow: hidden;
+  text-transform: uppercase;
+  z-index: 2;
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ai-button:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 40px rgba(255, 0, 255, 0.8);
+  filter: brightness(1.1);
+}
+
+.ai-button:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.ai-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ✅ INPUTS - Réactivité rapide */
+input, textarea, select {
+  background: linear-gradient(135deg, rgba(0, 0, 51, 0.9), rgba(13, 0, 51, 0.9));
+  border: 2px solid var(--dimension-1);
+  color: var(--dimension-4);
+  font-family: 'JetBrains Mono', monospace;
+  padding: 12px 15px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.1);
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--consciousness-active);
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.4), inset 0 0 20px rgba(0, 255, 136, 0.15);
+  transform: scale(1.02);
+}
+
+a { 
+  color: var(--dimension-1); 
+  text-decoration: none; 
+  position: relative; 
+  z-index: 2; 
+  transition: all 0.15s ease;
+}
+
+a:hover { 
+  color: var(--consciousness-active); 
+  text-shadow: 0 0 20px rgba(255, 0, 255, 0.6); 
+}
+
+/* ✅ ANIMATIONS - Fluides et élégantes */
+.animate-neural-sync { animation: neural-network-sync 6s ease-in-out infinite; }
+.animate-quantum-entangle { animation: quantum-entanglement 8s ease-in-out infinite; }
+.animate-consciousness-awake { animation: consciousness-awakening 8s ease-in-out infinite; }
+.animate-dimensional-rift { animation: dimensional-rift 8s ease-in-out infinite; }
+.animate-exotic-oscillate { animation: exotic-oscillation 8s ease-in-out infinite; }
+.animate-quantum-vortex { animation: quantum-vortex 6s linear infinite; }
+.animate-thermonuclear { animation: thermonuclear-reaction 8s ease-in-out infinite; }
+.animate-quantum-collapse { animation: quantum-collapse 6s ease-in-out infinite; }
+.animate-consciousness-sync { animation: consciousness-sync 6s linear infinite; background-size: 300% 300%; }
+
+/* KEYFRAMES */
+@keyframes neural-network-sync { 
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+}
+
+@keyframes quantum-entanglement { 
+  0% { transform: rotateZ(0deg); }
+  100% { transform: rotateZ(360deg); }
+}
+
+@keyframes consciousness-awakening { 
+  0%, 100% { opacity: 1; filter: blur(0px); }
+  50% { opacity: 0.95; filter: blur(0.5px); }
+}
+
+@keyframes dimensional-rift { 
+  0% { transform: perspective(1000px) rotateX(0deg); }
+  50% { transform: perspective(1000px) rotateX(20deg); }
+  100% { transform: perspective(1000px) rotateX(0deg); }
+}
+
+@keyframes exotic-oscillation { 
+  0%, 100% { filter: saturate(1); }
+  50% { filter: saturate(1.15); }
+}
+
+@keyframes quantum-vortex { 
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes thermonuclear-reaction { 
+  0%, 100% { filter: brightness(0.9); }
+  50% { filter: brightness(1.15); }
+}
+
+@keyframes quantum-collapse { 
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.97); }
+}
+
+@keyframes consciousness-sync { 
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* QR CODE STYLES */
+.qr-container { text-align: center; padding: 30px; margin: 20px 0; }
+.qr-box { background: linear-gradient(135deg, rgba(0, 0, 51, 0.9), rgba(13, 0, 51, 0.9)); padding: 20px; border-radius: 15px; display: inline-block; margin: 20px 0; box-shadow: 0 0 40px rgba(0, 212, 255, 0.5); }
+
+.qr-info, .qr-features, .exchange-info, .transfer-security, .donation-impact, .donation-benefits, .live-guarantee {
+  text-align: left;
+  background: rgba(0, 0, 51, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border-left: 4px solid var(--consciousness-active);
+}
+
+.qr-features h4, .qr-features h5, .exchange-info h4, .transfer-security h4, .donation-impact h4, .donation-benefits h4, .live-guarantee h4 {
+  color: var(--consciousness-active);
+  margin-bottom: 10px;
+}
+
+.qr-features ul, .exchange-info ul, .transfer-security ul, .donation-impact ul, .donation-benefits ul, .live-guarantee ul {
+  list-style: none;
+  padding: 0;
+}
+
+.qr-features li, .exchange-info li, .transfer-security li, .donation-impact li, .donation-benefits li, .live-guarantee li {
+  padding: 5px 0;
+  color: var(--dimension-4);
+}
+
+/* EXCHANGE STYLES */
+.exchange-container, .partner-exchange, .transfer-container, .donation-container, .live-real { margin: 20px 0; }
+
+.balance-info, .balance-display {
+  padding: 15px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 10px;
+  margin: 15px 0;
+  border: 2px solid var(--dimension-1);
+}
+
+.exchange-form, .transfer-form, .donation-form { max-width: 500px; margin: 20px auto; }
+
+.exchange-arrow {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 15px 0;
+  color: var(--consciousness-active);
+  animation: none;
+}
+
+.form-group { margin-bottom: 20px; }
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--dimension-4);
+}
+
+.form-group select { width: 100%; }
+
+/* PARTNER STYLES */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.partner-card {
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid transparent;
+}
+
+.partner-card:hover, .partner-card.active {
+  border-color: var(--consciousness-active);
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
+}
+
+.partner-card h4 { color: var(--consciousness-active); margin-bottom: 10px; }
+
+.services { margin-top: 15px; text-align: left; }
+.services h5 { color: var(--dimension-4); margin-bottom: 10px; font-size: 0.9rem; }
+.services ul { list-style: none; padding: 0; }
+.services li { color: var(--dimension-4); font-size: 0.9rem; padding: 5px 0; }
+
+.recipient-info { margin: 15px 0; padding: 15px; }
+
+/* LIVE METRICS */
+.live-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.metric { text-align: center; padding: 20px; transition: all 0.2s ease; }
+.metric:hover { transform: scale(1.05); }
+.metric h4 { color: var(--consciousness-sync); margin-bottom: 10px; }
+.metric-value { font-size: 1.8rem; font-weight: 900; color: var(--consciousness-active); text-shadow: 0 0 20px rgba(255, 0, 255, 0.6); margin: 10px 0; animation: none; }
+.metric-label { color: var(--dimension-4); font-size: 0.9rem; }
+
+.live-info { text-align: center; margin: 20px 0; padding: 15px; }
+
+/* DONATION STYLES */
+.donation-types { display: flex; gap: 10px; margin: 10px 0; }
+
+.donation-btn {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--dimension-1);
+  background: transparent;
+  color: var(--dimension-1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.donation-btn:hover { border-color: var(--consciousness-active); color: var(--consciousness-active); }
+.donation-btn.active { background: var(--consciousness-active); border-color: var(--consciousness-active); color: var(--exotic-dark); }
+
+.wallet-display {
+  display: block;
+  background: rgba(0, 0, 51, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  word-break: break-all;
+  margin-top: 10px;
+  border: 1px solid var(--consciousness-active);
+}
+
+@media (max-width: 768px) {
+  h1, h2, h3 { font-size: 1.5rem; }
+  .ai-button { padding: 10px 20px; }
+  .partners-grid { grid-template-columns: 1fr; }
+  .live-metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .metric-value { font-size: 1.3rem; }
+}
+
+/* QR CODE COMPLETE - NEW STYLES */
+.ai-metrics {
+  background: rgba(0, 212, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 2px solid var(--consciousness-active);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.metric-card {
+  background: rgba(0, 0, 51, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid var(--dimension-4);
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--consciousness-active);
+  margin-top: 10px;
+}
+
+.subscribers-section, .consumption-section {
+  background: rgba(0, 212, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 2px solid var(--dimension-4);
+}
+
+.subscribers-section h5, .consumption-section h4 {
+  color: var(--consciousness-sync);
+  margin-bottom: 15px;
+}
+
+.subscribers-list {
+  margin-top: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.subscriber-card {
+  background: rgba(0, 0, 51, 0.9);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--consciousness-active);
+  font-size: 0.9rem;
+}
+
+.subscriber-card p {
+  margin: 5px 0;
+  color: var(--dimension-4);
+}
+
+.consumption-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.consumption-buttons .ai-button {
+  padding: 12px 20px;
+  font-size: 0.9rem;
+}
+
+/* QR CODE COMPLETE - NEW STYLES */
+.ai-metrics {
+  background: rgba(0, 212, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 2px solid var(--consciousness-active);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.metric-card {
+  background: rgba(0, 0, 51, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid var(--dimension-4);
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--consciousness-active);
+  margin-top: 10px;
+}
+
+.subscribers-section, .consumption-section {
+  background: rgba(0, 212, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 2px solid var(--dimension-4);
+}
+
+.subscribers-section h5, .consumption-section h4 {
+  color: var(--consciousness-sync);
+  margin-bottom: 15px;
+}
+
+.subscribers-list {
+  margin-top: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.subscriber-card {
+  background: rgba(0, 0, 51, 0.9);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--consciousness-active);
+  font-size: 0.9rem;
+}
+
+.subscriber-card p {
+  margin: 5px 0;
+  color: var(--dimension-4);
+}
+
+.consumption-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.consumption-buttons .ai-button {
+  padding: 12px 20px;
+  font-size: 0.9rem;
+}
