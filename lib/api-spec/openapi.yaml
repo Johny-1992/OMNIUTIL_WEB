@@ -1,22 +1,30 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: OmniUtil Infrastructure API - Reward on Real Consumption
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: partners
+    description: Partner ecosystem management
+  - name: users
+    description: User wallet and reward management
+  - name: transactions
+    description: Consumption and reward transactions
+  - name: stats
+    description: Dashboard statistics and analytics
+  - name: languages
+    description: Multilingual content
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +32,379 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /partners:
+    get:
+      operationId: listPartners
+      tags: [partners]
+      summary: List all active partners
+      responses:
+        "200":
+          description: List of partners
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Partner"
+    post:
+      operationId: createPartnerApplication
+      tags: [partners]
+      summary: Submit a new partner application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePartnerApplicationBody"
+      responses:
+        "201":
+          description: Application submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerApplication"
+
+  /partners/{id}:
+    get:
+      operationId: getPartner
+      tags: [partners]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Partner details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Partner"
+    patch:
+      operationId: updatePartner
+      tags: [partners]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePartnerBody"
+      responses:
+        "200":
+          description: Updated partner
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Partner"
+
+  /partners/{id}/approve:
+    post:
+      operationId: approvePartner
+      tags: [partners]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Partner approved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Partner"
+
+  /partners/{id}/reject:
+    post:
+      operationId: rejectPartner
+      tags: [partners]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RejectPartnerBody"
+      responses:
+        "200":
+          description: Partner rejected
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Partner"
+
+  /partners/{id}/stats:
+    get:
+      operationId: getPartnerStats
+      tags: [partners]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Partner statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerStats"
+
+  /applications:
+    get:
+      operationId: listApplications
+      tags: [partners]
+      summary: List all partner applications
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, approved, rejected]
+      responses:
+        "200":
+          description: List of applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PartnerApplication"
+
+  /users:
+    get:
+      operationId: listUsers
+      tags: [users]
+      summary: List users (paginated)
+      parameters:
+        - name: partnerId
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedUsers"
+
+  /users/{walletAddress}:
+    get:
+      operationId: getUser
+      tags: [users]
+      parameters:
+        - name: walletAddress
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User details with wallet info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserWallet"
+
+  /users/{walletAddress}/transactions:
+    get:
+      operationId: getUserTransactions
+      tags: [users]
+      parameters:
+        - name: walletAddress
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        "200":
+          description: User transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedTransactions"
+
+  /transactions:
+    get:
+      operationId: listTransactions
+      tags: [transactions]
+      summary: List all reward transactions
+      parameters:
+        - name: partnerId
+          in: query
+          schema:
+            type: string
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [reward, transfer, exchange, burn]
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        "200":
+          description: Transactions list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedTransactions"
+
+  /transactions/consumption:
+    post:
+      operationId: recordConsumption
+      tags: [transactions]
+      summary: Record a consumption event (called by partner API)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecordConsumptionBody"
+      responses:
+        "201":
+          description: Consumption recorded and reward queued
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsumptionResult"
+
+  /stats/overview:
+    get:
+      operationId: getOverviewStats
+      tags: [stats]
+      summary: Global infrastructure statistics
+      responses:
+        "200":
+          description: Global stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OverviewStats"
+
+  /stats/rewards-timeline:
+    get:
+      operationId: getRewardsTimeline
+      tags: [stats]
+      summary: Reward distribution over time
+      parameters:
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+      responses:
+        "200":
+          description: Timeline data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TimelinePoint"
+
+  /stats/top-partners:
+    get:
+      operationId: getTopPartners
+      tags: [stats]
+      summary: Top performing partners by volume
+      responses:
+        "200":
+          description: Top partners
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PartnerRanking"
+
+  /stats/ecosystem-breakdown:
+    get:
+      operationId: getEcosystemBreakdown
+      tags: [stats]
+      summary: Breakdown by ecosystem type
+      responses:
+        "200":
+          description: Ecosystem breakdown
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EcosystemSegment"
+
+  /stats/util-price:
+    get:
+      operationId: getUtilPrice
+      tags: [stats]
+      summary: Current UTIL/USDT price and market data
+      responses:
+        "200":
+          description: UTIL price data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UtilPrice"
+
+  /qr/partner-onboarding:
+    get:
+      operationId: getPartnerQRCode
+      tags: [partners]
+      summary: Get the partner onboarding QR code data
+      responses:
+        "200":
+          description: QR code data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QRCodeData"
+
+  /contract/info:
+    get:
+      operationId: getContractInfo
+      tags: [stats]
+      summary: BSC smart contract live data
+      responses:
+        "200":
+          description: Contract information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContractInfo"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +412,408 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    Partner:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        ecosystemType:
+          type: string
+          enum: [mobile, tv, ebank, ecommerce, casino, supermarket, hotel, bar, sports_betting, network, other]
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+        walletAddress:
+          type: string
+        rewardRate:
+          type: number
+          description: Percentage of consumption rewarded in UTIL
+        loyaltyFactor:
+          type: number
+        apiEndpoint:
+          type: string
+        status:
+          type: string
+          enum: [pending, active, suspended, rejected]
+        level:
+          type: integer
+          description: Partner tier 1-3
+        totalUsers:
+          type: integer
+        totalVolume:
+          type: number
+        totalRewardsDistributed:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        onChainAddress:
+          type: string
+      required: [id, name, ecosystemType, rewardRate, status, createdAt]
+
+    CreatePartnerApplicationBody:
+      type: object
+      properties:
+        name:
+          type: string
+        ecosystemType:
+          type: string
+          enum: [mobile, tv, ebank, ecommerce, casino, supermarket, hotel, bar, sports_betting, network, other]
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+        walletAddress:
+          type: string
+        rewardRate:
+          type: number
+        billingApiEndpoint:
+          type: string
+        billingApiKey:
+          type: string
+        description:
+          type: string
+        country:
+          type: string
+        estimatedUsers:
+          type: integer
+        acceptedTerms:
+          type: boolean
+      required: [name, ecosystemType, contactName, contactEmail, walletAddress, rewardRate, billingApiEndpoint, acceptedTerms]
+
+    UpdatePartnerBody:
+      type: object
+      properties:
+        rewardRate:
+          type: number
+        loyaltyFactor:
+          type: number
+        apiEndpoint:
+          type: string
+        level:
+          type: integer
+
+    RejectPartnerBody:
+      type: object
+      properties:
+        reason:
+          type: string
+      required: [reason]
+
+    PartnerApplication:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        ecosystemType:
+          type: string
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+        walletAddress:
+          type: string
+        rewardRate:
+          type: number
+        billingApiEndpoint:
+          type: string
+        description:
+          type: string
+        country:
+          type: string
+        estimatedUsers:
+          type: integer
+        status:
+          type: string
+          enum: [pending, approved, rejected]
+        rejectionReason:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+        reviewedAt:
+          type: string
+          format: date-time
+      required: [id, name, ecosystemType, contactName, contactEmail, walletAddress, rewardRate, status, submittedAt]
+
+    PartnerStats:
+      type: object
+      properties:
+        partnerId:
+          type: string
+        totalUsers:
+          type: integer
+        activeUsers:
+          type: integer
+        totalConsumptionUSD:
+          type: number
+        totalRewardsUTIL:
+          type: number
+        rewardsThisMonth:
+          type: number
+        avgRewardPerUser:
+          type: number
+        recentTransactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transaction"
+      required: [partnerId, totalUsers, totalConsumptionUSD, totalRewardsUTIL]
+
+    UserWallet:
+      type: object
+      properties:
+        walletAddress:
+          type: string
+        userId:
+          type: string
+        partnerId:
+          type: string
+        partnerName:
+          type: string
+        utilBalance:
+          type: number
+        totalEarned:
+          type: number
+        totalSpent:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        lastActivity:
+          type: string
+          format: date-time
+      required: [walletAddress, userId, partnerId, utilBalance, totalEarned]
+
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [reward, transfer, exchange, burn, fee]
+        fromAddress:
+          type: string
+        toAddress:
+          type: string
+        amount:
+          type: number
+        consumptionAmountUSD:
+          type: number
+        partnerId:
+          type: string
+        partnerName:
+          type: string
+        txHash:
+          type: string
+        status:
+          type: string
+          enum: [pending, confirmed, failed]
+        createdAt:
+          type: string
+          format: date-time
+      required: [id, type, amount, status, createdAt]
+
+    RecordConsumptionBody:
+      type: object
+      properties:
+        partnerApiKey:
+          type: string
+        userId:
+          type: string
+        amountLocal:
+          type: number
+        currency:
+          type: string
+        serviceType:
+          type: string
+        validationHash:
+          type: string
+      required: [partnerApiKey, userId, amountLocal, currency, serviceType, validationHash]
+
+    ConsumptionResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        userId:
+          type: string
+        utilRewarded:
+          type: number
+        consumptionUSD:
+          type: number
+        txHash:
+          type: string
+        walletAddress:
+          type: string
+      required: [success, utilRewarded, consumptionUSD]
+
+    PaginatedUsers:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserWallet"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+      required: [data, total, page, limit]
+
+    PaginatedTransactions:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transaction"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+      required: [data, total, page, limit]
+
+    OverviewStats:
+      type: object
+      properties:
+        totalPartners:
+          type: integer
+        activePartners:
+          type: integer
+        totalUsers:
+          type: integer
+        totalRewardsDistributed:
+          type: number
+        totalConsumptionVolumeUSD:
+          type: number
+        utilCirculatingSupply:
+          type: number
+        utilTotalSupply:
+          type: number
+        utilPriceUSDT:
+          type: number
+        pendingApplications:
+          type: integer
+        rewardsLast24h:
+          type: number
+        transactionsLast24h:
+          type: integer
+      required: [totalPartners, totalUsers, totalRewardsDistributed, utilPriceUSDT]
+
+    TimelinePoint:
+      type: object
+      properties:
+        date:
+          type: string
+        rewardsUTIL:
+          type: number
+        consumptionUSD:
+          type: number
+        newUsers:
+          type: integer
+      required: [date, rewardsUTIL, consumptionUSD, newUsers]
+
+    PartnerRanking:
+      type: object
+      properties:
+        rank:
+          type: integer
+        partnerId:
+          type: string
+        partnerName:
+          type: string
+        ecosystemType:
+          type: string
+        totalVolume:
+          type: number
+        totalUsers:
+          type: integer
+        totalRewards:
+          type: number
+      required: [rank, partnerId, partnerName, totalVolume, totalUsers]
+
+    EcosystemSegment:
+      type: object
+      properties:
+        type:
+          type: string
+        label:
+          type: string
+        count:
+          type: integer
+        volumeUSD:
+          type: number
+        rewardsUTIL:
+          type: number
+        percentage:
+          type: number
+      required: [type, label, count, volumeUSD, percentage]
+
+    UtilPrice:
+      type: object
+      properties:
+        priceUSDT:
+          type: number
+        change24h:
+          type: number
+        volume24h:
+          type: number
+        marketCap:
+          type: number
+        circulatingSupply:
+          type: number
+        contractAddress:
+          type: string
+        network:
+          type: string
+      required: [priceUSDT, contractAddress, network]
+
+    QRCodeData:
+      type: object
+      properties:
+        url:
+          type: string
+        partnerOnboardingUrl:
+          type: string
+        qrImageBase64:
+          type: string
+      required: [url, partnerOnboardingUrl]
+
+    ContractInfo:
+      type: object
+      properties:
+        address:
+          type: string
+        network:
+          type: string
+        totalSupply:
+          type: number
+        mintedThisYear:
+          type: number
+        maxAnnualMint:
+          type: number
+        ownerWallet:
+          type: string
+        treasuryWallet:
+          type: string
+        creatorFeePercent:
+          type: number
+        treasuryFeePercent:
+          type: number
+        burnPercent:
+          type: number
+        verified:
+          type: boolean
+      required: [address, network, totalSupply, verified]
