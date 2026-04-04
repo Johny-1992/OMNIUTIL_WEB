@@ -1,12 +1,8 @@
 import { Router, type IRouter } from "express";
-import { eq, desc, sql, and, count } from "drizzle-orm";
+import { eq, desc, sql, and } from "drizzle-orm";
 import { db, partnersTable, userWalletsTable, transactionsTable } from "@workspace/db";
 import { GetRewardsTimelineQueryParams } from "@workspace/api-zod";
-
-const CONTRACT_ADDRESS = "0xC8A3EA13b51C5e0a8e5c979d6A0b4BDa6bb1e76B";
-const OWNER_WALLET = "0x40BB46B9D10Dd121e7D2150EC3784782ae648090";
-const TREASURY_WALLET = "0xB13B61a6a84ABfAEfF17E92E41ee6F0eBF42693B";
-const TOTAL_ANNUAL_SUPPLY = 1_000_000;
+import { getContractInfo, getUtilPrice } from "../services/blockchain";
 
 const router: IRouter = Router();
 
@@ -17,17 +13,16 @@ router.get("/stats/overview", async (_req, res): Promise<void> => {
     totalUsersResult,
     totalRewardsResult,
     totalVolumeResult,
-    mintedResult,
     pendingResult,
     rewards24hResult,
     txs24hResult,
+    contractInfo,
   ] = await Promise.all([
     db.select({ count: sql<number>`count(*)` }).from(partnersTable),
     db.select({ count: sql<number>`count(*)` }).from(partnersTable).where(eq(partnersTable.status, "active")),
     db.select({ count: sql<number>`count(*)` }).from(userWalletsTable),
     db.select({ total: sql<number>`coalesce(sum(total_rewards_distributed), 0)` }).from(partnersTable),
     db.select({ total: sql<number>`coalesce(sum(total_volume), 0)` }).from(partnersTable),
-    db.select({ total: sql<number>`coalesce(sum(amount), 0)` }).from(transactionsTable).where(eq(transactionsTable.type, "reward")),
     db.select({ count: sql<number>`count(*)` }).from(partnersTable).where(eq(partnersTable.status, "pending")),
     db.select({ total: sql<number>`coalesce(sum(amount), 0)` }).from(transactionsTable).where(
       and(
@@ -38,22 +33,28 @@ router.get("/stats/overview", async (_req, res): Promise<void> => {
     db.select({ count: sql<number>`count(*)` }).from(transactionsTable).where(
       sql`created_at >= now() - interval '24 hours'`
     ),
+    getContractInfo().catch(() => null),
   ]);
-
-  const totalRewards = Number(totalRewardsResult[0]?.total ?? 0);
 
   res.json({
     totalPartners: Number(totalPartnersResult[0]?.count ?? 0),
     activePartners: Number(activePartnersResult[0]?.count ?? 0),
     totalUsers: Number(totalUsersResult[0]?.count ?? 0),
-    totalRewardsDistributed: totalRewards,
+    totalRewardsDistributed: Number(totalRewardsResult[0]?.total ?? 0),
     totalConsumptionVolumeUSD: Number(totalVolumeResult[0]?.total ?? 0),
-    utilCirculatingSupply: totalRewards,
-    utilTotalSupply: TOTAL_ANNUAL_SUPPLY,
-    utilPriceUSDT: 0.1,
+    utilCirculatingSupply: contractInfo?.mintedThisYear ?? Number(totalRewardsResult[0]?.total ?? 0),
+    utilTotalSupply: contractInfo?.totalSupply ?? 1_000_000,
+    utilPriceUSDT: null,
     pendingApplications: Number(pendingResult[0]?.count ?? 0),
     rewardsLast24h: Number(rewards24hResult[0]?.total ?? 0),
     transactionsLast24h: Number(txs24hResult[0]?.count ?? 0),
+    onChain: contractInfo ? {
+      mintedThisYear: contractInfo.mintedThisYear,
+      maxAnnualMint: contractInfo.maxAnnualMint,
+      remainingMintable: contractInfo.remainingMintable,
+      contractAddress: contractInfo.address,
+      symbol: contractInfo.symbol,
+    } : null,
   });
 });
 
@@ -151,43 +152,42 @@ router.get("/stats/ecosystem-breakdown", async (_req, res): Promise<void> => {
 });
 
 router.get("/stats/util-price", async (_req, res): Promise<void> => {
+  const [priceInfo, contractInfo] = await Promise.all([
+    getUtilPrice(),
+    getContractInfo().catch(() => null),
+  ]);
+
   res.json({
-    priceUSDT: 0.1,
-    change24h: 2.4,
-    volume24h: 125000,
-    marketCap: 100000,
-    circulatingSupply: 1000000,
-    contractAddress: CONTRACT_ADDRESS,
-    network: "BSC Mainnet",
+    priceUSDT: priceInfo.priceUSDT,
+    listed: priceInfo.listed,
+    source: priceInfo.source,
+    message: priceInfo.message,
+    change24h: null,
+    volume24h: null,
+    marketCap: priceInfo.priceUSDT && contractInfo
+      ? priceInfo.priceUSDT * contractInfo.totalSupply
+      : null,
+    circulatingSupply: contractInfo?.totalSupply ?? null,
+    contractAddress: priceInfo.contractAddress,
+    network: priceInfo.network,
+    explorerUrl: priceInfo.explorerUrl,
   });
 });
 
 router.get("/contract/info", async (_req, res): Promise<void> => {
-  const mintedResult = await db
-    .select({ total: sql<number>`coalesce(sum(amount), 0)` })
-    .from(transactionsTable)
-    .where(
-      and(
-        eq(transactionsTable.type, "reward"),
-        sql`created_at >= date_trunc('year', now())`
-      )
-    );
-
-  const minted = Number(mintedResult[0]?.total ?? 0);
-
-  res.json({
-    address: CONTRACT_ADDRESS,
-    network: "BSC Mainnet",
-    totalSupply: TOTAL_ANNUAL_SUPPLY,
-    mintedThisYear: minted,
-    maxAnnualMint: TOTAL_ANNUAL_SUPPLY,
-    ownerWallet: OWNER_WALLET,
-    treasuryWallet: TREASURY_WALLET,
-    creatorFeePercent: 0.5,
-    treasuryFeePercent: 0.5,
-    burnPercent: 0,
-    verified: true,
-  });
+  try {
+    const info = await getContractInfo();
+    res.json(info);
+  } catch (err) {
+    const error = err as Error;
+    res.status(503).json({
+      error: "Impossible de lire le contrat BSC Mainnet",
+      detail: error.message,
+      contractAddress: "0xC8A3EA13b51C5e0a8e5c979d6A0b4BDa6bb1e76B",
+      network: "BSC Mainnet",
+      explorerUrl: "https://bscscan.com/token/0xC8A3EA13b51C5e0a8e5c979d6A0b4BDa6bb1e76B",
+    });
+  }
 });
 
 export default router;
