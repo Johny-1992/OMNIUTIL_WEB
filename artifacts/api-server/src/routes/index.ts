@@ -4,6 +4,7 @@ import partnersRouter from "./partners";
 import usersRouter from "./users";
 import transactionsRouter from "./transactions";
 import statsRouter from "./stats";
+import tokenRouter from "./token";
 
 const router: IRouter = Router();
 
@@ -12,5 +13,6 @@ router.use(partnersRouter);
 router.use(usersRouter);
 router.use(transactionsRouter);
 router.use(statsRouter);
+router.use(tokenRouter);
 
 export default router;
