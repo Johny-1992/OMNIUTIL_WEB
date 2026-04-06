@@ -7,6 +7,7 @@ import PartnerDashboard from "@/pages/partner-dashboard";
 import AdminDashboard from "@/pages/admin-dashboard";
 import Users from "@/pages/users";
 import Partners from "@/pages/partners";
+import Listing from "@/pages/listing";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/dashboard" component={AdminDashboard} />
           <Route path="/users" component={Users} />
           <Route path="/partners" component={Partners} />
+          <Route path="/listing" component={Listing} />
           <Route>
             <div className="p-8 text-center text-muted-foreground">404 Not Found</div>
           </Route>
