@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import {
   Terminal, Database, Users, LayoutDashboard,
-  FileSignature, ChevronRight, Globe, ExternalLink, Menu, X
+  FileSignature, ChevronRight, Globe, ExternalLink, Menu, X, Rocket
 } from "lucide-react";
 import { useGetContractInfo } from "@workspace/api-client-react";
 
@@ -30,6 +30,7 @@ export function Layout({ children }: { children: ReactNode }) {
     { href: "/partner/dashboard", label: t("partner_dash"), icon: <Database className="w-4 h-4" /> },
     { href: "/users", label: t("users_explorer"), icon: <Users className="w-4 h-4" /> },
     { href: "/partners", label: t("partners_dir"), icon: <FileSignature className="w-4 h-4" /> },
+    { href: "/listing", label: "Listing Mondial", icon: <Rocket className="w-4 h-4" /> },
   ];
 
   const SidebarContent = () => (
